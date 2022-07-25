@@ -3,11 +3,22 @@ import styled from "styled-components";
 import { PrimaryButton } from "../Buttons";
 
 const Container = styled.article`
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+
   padding: 1rem;
   background-color: #0000000a;
   border-radius: 0.25rem;
 
   header {
+    display: block;
+    width: 100%;
+
+    .img {
+      object-fit: cover;
+      border-radius: 0.25rem;
+    }
   }
 
   footer {
@@ -18,14 +29,22 @@ const Container = styled.article`
       justify-content: space-between;
       width: 100%;
 
+      .name {
+        text-transform: capitalize;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+      }
       .instructor {
         font-size: 0.8rem;
-        opacity: 0.25;
+        opacity: 0.4;
+        font-weight: 300;
       }
       .meta {
         display: flex;
         flex-flow: column;
         align-items: flex-end;
+        font-size: 0.85rem;
+        opacity: 0.65;
       }
     }
     .btn {
@@ -35,21 +54,36 @@ const Container = styled.article`
   }
 `;
 
-function Card() {
+interface CardProps {
+  image: string;
+  instructor: string;
+  name: string;
+  total_time: string;
+  score: string;
+}
+function Card({ instructor, name, total_time, score, image }: CardProps) {
   return (
     <Container>
       <header>
-        <Image layout="fill" src="" alt="" />
+        <Image
+          className="img"
+          layout="responsive"
+          width={1920}
+          height={1080}
+          src={image}
+          alt=""
+        />
       </header>
+
       <footer>
         <div className="description">
           <div>
-            <h3 className="name">learn figma</h3>
-            <p className="instructor">by Christopher Morgan</p>
+            <h3 className="name">{name}</h3>
+            <p className="instructor">by {instructor}</p>
           </div>
           <div className="meta">
-            <time>6h 30min</time>
-            <p>4,9</p>
+            <time>{total_time}</time>
+            <p>{score}</p>
           </div>
         </div>
 
