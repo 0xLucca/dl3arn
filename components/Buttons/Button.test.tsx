@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Button from "./BaseButton";
+import Button from "./Button";
 
 const ClickEvent = new MouseEvent("click", { bubbles: true, cancelable: true });
 
