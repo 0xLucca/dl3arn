@@ -2,11 +2,10 @@ import styled from "styled-components";
 import Button from "./BaseButton";
 
 export const PrimaryButton = styled(Button)`
-  background-color: #5af;
+  background-color: #1e1e20;
   color: #fff;
   :hover {
     box-shadow: 0 0.25rem 0.5rem #0002;
-    transform: translate(0, -5px);
   }
 `;
 
@@ -17,7 +16,6 @@ export const SecondaryButton = styled(Button)`
   color: var(--color);
   :hover {
     box-shadow: 0 0.25rem 0.5rem #0002;
-    transform: translate(0, -5px);
   }
 `;
 
