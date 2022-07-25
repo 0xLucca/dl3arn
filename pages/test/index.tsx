@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Router from "next/router";
+import styled from "styled-components";
 
 import {
   PrimaryButton,
@@ -7,8 +8,18 @@ import {
   SimpleButton,
 } from "../../components/Buttons";
 
+import { NODE_ENV } from "../../constants";
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+  max-width: 300px;
+  margin: 0 auto;
+`;
+
 function Test() {
-  if (process.env.NODE_ENV !== "development") return Router.back();
+  if (NODE_ENV !== "development") return Router.back();
 
   return (
     <div>
@@ -19,11 +30,11 @@ function Test() {
       <main>
         <h1>Test</h1>
 
-        <div>
+        <ButtonsContainer>
           <PrimaryButton>Simple</PrimaryButton>
           <SecondaryButton>Simple</SecondaryButton>
           <SimpleButton>Simple</SimpleButton>
-        </div>
+        </ButtonsContainer>
       </main>
       <footer></footer>
     </div>
