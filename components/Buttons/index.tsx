@@ -1,34 +1,29 @@
-import { HTMLAttributes, ReactNode } from "react";
-import styles from "./styles.module.css";
+import styled from "styled-components";
+import Button from "./BaseButton";
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-}
-export function Button({ children, ...other }: ButtonProps) {
-  return <button {...other}>{children}</button>;
-}
+export const PrimaryButton = styled(Button)`
+  background-color: #5af;
+  color: #fff;
+  :hover {
+    box-shadow: 0 0.25rem 0.5rem #0002;
+    transform: translate(0, -5px);
+  }
+`;
 
-/* Buttons with styles */
-export function PrimaryButton({ children, ...others }: ButtonProps) {
-  return (
-    <Button className={styles.primary} {...others}>
-      {children}
-    </Button>
-  );
-}
+export const SecondaryButton = styled(Button)`
+  --color: #1e1e20;
+  background-color: #fff;
+  border: 1px solid var(--color);
+  color: var(--color);
+  :hover {
+    box-shadow: 0 0.25rem 0.5rem #0002;
+    transform: translate(0, -5px);
+  }
+`;
 
-export function SecondaryButton({ children, ...others }: ButtonProps) {
-  return (
-    <Button className={styles.secondary} {...others}>
-      {children}
-    </Button>
-  );
-}
-
-export function SimpleButton({ children, ...others }: ButtonProps) {
-  return (
-    <Button className={styles.simple} {...others}>
-      {children}
-    </Button>
-  );
-}
+export const SimpleButton = styled(Button)`
+  text-decoration: underline;
+  :hover {
+    box-shadow: 0 0.25rem 0.5rem #0002;
+  }
+`;
