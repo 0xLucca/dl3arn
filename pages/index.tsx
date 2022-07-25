@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { PrimaryButton, SecondaryButton } from "../components/Buttons";
 
 const Home: NextPage = () => {
   return (
@@ -17,9 +16,6 @@ const Home: NextPage = () => {
       <main style={{ display: "grid", placeItems: "center", height: "100vh" }}>
         <div>
           <h1>DL3arn</h1>
-
-          <PrimaryButton>Login</PrimaryButton>
-          <SecondaryButton>Login</SecondaryButton>
         </div>
       </main>
       <footer></footer>

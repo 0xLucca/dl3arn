@@ -1,19 +1,43 @@
-.primary, .secondary {
+.primary, .secondary, .simple {
   border: none;
   background-color: transparent;
   width: 100%;
   padding: .75rem;
   font-weight: 600;
+  box-shadow: 0 .25rem .5rem #0000;
+  transition: all .15s;
+  border-radius: .25rem;
 }
 
 .primary {
   background-color: #5af;
-  border-radius: .25rem;
   color: #fff;
 }
 
+
 .secondary {
-  border-radius: .25rem;
+  --color:#1e1e20; 
+  background-color: #fff;
+  border: 1px solid var(--color);
+  color: var(--color);
+
+}
+.simple {
   text-decoration: underline;
-  color: #1e1e20
+}
+
+/* Hovers */
+
+.primary:hover {
+  box-shadow: 0 .25rem .5rem #0002;
+  transform: translate(0, -5px);
+}
+
+.secondary:hover {
+  box-shadow: 0 .25rem .5rem #0002;
+  transform: translate(0, -5px);
+}
+
+.simple:hover {
+  box-shadow: 0 .25rem .5rem #0002;
 }
