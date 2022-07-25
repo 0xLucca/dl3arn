@@ -1,0 +1,19 @@
+.primary, .secondary {
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  padding: .75rem;
+  font-weight: 600;
+}
+
+.primary {
+  background-color: #5af;
+  border-radius: .25rem;
+  color: #fff;
+}
+
+.secondary {
+  border-radius: .25rem;
+  text-decoration: underline;
+  color: #1e1e20
+}
