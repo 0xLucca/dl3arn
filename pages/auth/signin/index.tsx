@@ -8,6 +8,7 @@ import { loginInputs } from "utils/inputs";
 
 import { Main } from "styles/auth";
 import { FormEvent } from "react";
+import Head from "next/head";
 
 function Login() {
   const { inputs, onChange } = useForm(loginInputs);
@@ -19,6 +20,11 @@ function Login() {
 
   return (
     <div>
+      <Head>
+        <title>DL3arn | Sign in</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <Main>
         <div>
           <form onSubmit={onSubmit} className="form">

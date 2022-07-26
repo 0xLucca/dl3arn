@@ -7,6 +7,7 @@ import useForm from "hooks/useForm";
 import { registerInputs } from "utils/inputs";
 import { Main } from "styles/auth";
 import { FormEvent } from "react";
+import Head from "next/head";
 
 function Signup() {
   const { inputs, onChange } = useForm(registerInputs);
@@ -18,6 +19,10 @@ function Signup() {
 
   return (
     <div>
+      <Head>
+        <title>DL3arn | Sign up</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Main>
         <div>
           <form onSubmit={onSubmit} className="form">

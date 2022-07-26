@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Avatar from "../Avatar";
+import { PrimaryButton } from "../Buttons";
 
 const Nav = styled.nav`
   position: fixed;
@@ -15,22 +17,22 @@ const Nav = styled.nav`
   }
 
   .wrapper {
-    width: 1200px;
+    width: 90%;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    > p {
+      font-weight: bold;
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+    }
   }
 
-  .avatar {
+  .menu {
     display: flex;
     align-items: center;
-    .image {
-      height: 2.5rem;
-      width: 2.5rem;
-      border-radius: 0.25rem;
-      background-color: #0002;
-    }
   }
 `;
 function Navbar() {
@@ -40,9 +42,11 @@ function Navbar() {
         <p>DL3arn</p>
 
         <div className="menu">
-          <div className="avatar">
-            <span className="image" />
-          </div>
+          <Avatar
+            username="estebanorlandi4"
+            img="https://picsum.photos/1920/1080?random=55"
+            onClick={() => console.log("hola")}
+          />
         </div>
       </div>
     </Nav>
