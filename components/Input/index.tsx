@@ -1,4 +1,4 @@
-import { HTMLProps } from "react";
+import { InputProps } from "@/types/";
 import styled from "styled-components";
 
 const Label = styled.label`
@@ -7,10 +7,7 @@ const Label = styled.label`
   }
 `;
 
-interface Props extends Omit<HTMLProps<HTMLInputElement>, "label"> {
-  label?: React.ReactNode;
-}
-function Input({ className, label, ...input }: Props) {
+function Input({ className, label, ...input }: InputProps) {
   return (
     <Label className={className}>
       {label && <span>{label}</span>}

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.main`
+export const Main = styled.main`
   display: grid;
   place-items: center;
   width: 100%;
@@ -18,23 +18,23 @@ export const Container = styled.main`
   .signup {
     margin: 1rem 0 0 0;
   }
-`;
 
-export const Form = styled.form`
-  gap: 1rem;
+  .form {
+    gap: 1rem;
 
-  &,
-  .inputs {
-    display: flex;
-    flex-flow: column;
-    width: 100%;
-  }
-
-  .inputs {
-    gap: 0.5rem;
-    label,
-    input {
+    &,
+    .inputs {
+      display: flex;
+      flex-flow: column;
       width: 100%;
+    }
+
+    .inputs {
+      gap: 0.5rem;
+      label,
+      input {
+        width: 100%;
+      }
     }
   }
 `;
