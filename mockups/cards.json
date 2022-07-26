@@ -1,142 +1,162 @@
 [
   {
+    "id": "card-1",
     "instructor": "Raimondo Tabbernor",
     "name": "Zaam-Dox",
     "score": 3.8,
     "image": "https://picsum.photos/1920/1080?random=1",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-2",
     "instructor": "Billy Annand",
     "name": "Stim",
     "score": 2.4,
     "image": "https://picsum.photos/1920/1080?random=2",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-3",
     "instructor": "Bobbye Ivain",
     "name": "Pannier",
     "score": 0.2,
     "image": "https://picsum.photos/1920/1080?random=3",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-4",
     "instructor": "Neely Plitz",
     "name": "Opela",
     "score": 1.4,
     "image": "https://picsum.photos/1920/1080?random=4",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-5",
     "instructor": "Shanie Jewson",
     "name": "Tres-Zap",
     "score": 2.6,
     "image": "https://picsum.photos/1920/1080?random=5",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-6",
     "instructor": "Elmer Hallowell",
     "name": "Rank",
     "score": 4.1,
     "image": "https://picsum.photos/1920/1080?random=6",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-7",
     "instructor": "Flora MacNeely",
     "name": "Rank",
     "score": 4.1,
     "image": "https://picsum.photos/1920/1080?random=7",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-8",
     "instructor": "Sibby Dunkinson",
     "name": "Vagram",
     "score": 4.8,
     "image": "https://picsum.photos/1920/1080?random=8",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-9",
     "instructor": "Roseline Tremellan",
     "name": "Greenlam",
     "score": 3.6,
     "image": "https://picsum.photos/1920/1080?random=9",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-10",
     "instructor": "Franky Dumsday",
     "name": "Alpha",
     "score": 2.4,
     "image": "https://picsum.photos/1920/1080?random=10",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-11",
     "instructor": "Rebeca Crutchley",
     "name": "Home Ing",
     "score": 1.4,
     "image": "https://picsum.photos/1920/1080?random=11",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-12",
     "instructor": "Monro Hinckley",
     "name": "Zoolab",
     "score": 0.8,
     "image": "https://picsum.photos/1920/1080?random=12",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-13",
     "instructor": "Antonina Kamien",
     "name": "Tresom",
     "score": 4.7,
     "image": "https://picsum.photos/1920/1080?random=13",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-14",
     "instructor": "Nikita Shovlin",
     "name": "Wrapsafe",
     "score": 2.4,
     "image": "https://picsum.photos/1920/1080?random=14",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-15",
     "instructor": "Juliette Luffman",
     "name": "Namfix",
     "score": 0.0,
     "image": "https://picsum.photos/1920/1080?random=15",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-16",
     "instructor": "Vail Tunnick",
     "name": "Y-find",
     "score": 3.7,
     "image": "https://picsum.photos/1920/1080?random=16",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-17",
     "instructor": "Ardene Murty",
     "name": "Bamity",
     "score": 2.5,
     "image": "https://picsum.photos/1920/1080?random=17",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-18",
     "instructor": "Keen Keir",
     "name": "Flowdesk",
     "score": 4.0,
     "image": "https://picsum.photos/1920/1080?random=18",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-19",
     "instructor": "Ilse McMeekan",
     "name": "Sub-Ex",
     "score": 4.0,
     "image": "https://picsum.photos/1920/1080?random=19",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   },
   {
+    "id": "card-20",
     "instructor": "Ema Spearett",
     "name": "Hatity",
     "score": 1.7,
     "image": "https://picsum.photos/1920/1080?random=20",
-    "total_time": "6h 30min"
+    "time": "6h 30min"
   }
 ]

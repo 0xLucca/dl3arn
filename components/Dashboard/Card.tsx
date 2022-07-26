@@ -1,67 +1,10 @@
 import Image from "next/image";
-import styled from "styled-components";
+import { Course } from "../../utils/types";
 import { PrimaryButton } from "../Buttons";
+import { Container } from "./styles";
 
-const Container = styled.article`
-  display: flex;
-  flex-flow: column;
-  gap: 1rem;
-
-  padding: 1rem;
-  background-color: #0000000a;
-  border-radius: 0.25rem;
-
-  header {
-    display: block;
-    width: 100%;
-
-    .img {
-      object-fit: cover;
-      border-radius: 0.25rem;
-    }
-  }
-
-  footer {
-    .description {
-      display: flex;
-      flex-flow: row;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-
-      .name {
-        text-transform: capitalize;
-        font-size: 1.1rem;
-        letter-spacing: 0.5px;
-      }
-      .instructor {
-        font-size: 0.8rem;
-        opacity: 0.4;
-        font-weight: 300;
-      }
-      .meta {
-        display: flex;
-        flex-flow: column;
-        align-items: flex-end;
-        font-size: 0.85rem;
-        opacity: 0.65;
-      }
-    }
-    .btn {
-      margin: 1rem 0 0 0;
-      font-size: 0.8rem;
-    }
-  }
-`;
-
-interface CardProps {
-  image: string;
-  instructor: string;
-  name: string;
-  total_time: string;
-  score: number;
-}
-function Card({ instructor, name, total_time, score, image }: CardProps) {
+interface CardProps extends Course {}
+function Card({ instructor, name, time, score, image }: CardProps) {
   return (
     <Container>
       <header>
@@ -79,10 +22,10 @@ function Card({ instructor, name, total_time, score, image }: CardProps) {
         <div className="description">
           <div>
             <h3 className="name">{name}</h3>
-            <p className="instructor">by {instructor}</p>
+            <p className="instructor">{`by ${instructor}`}</p>
           </div>
           <div className="meta">
-            <time>{total_time}</time>
+            <time>{time}</time>
             <p>{score}</p>
           </div>
         </div>
