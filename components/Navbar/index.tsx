@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Avatar from "../Avatar";
-import { PrimaryButton } from "../Buttons";
 
 const Nav = styled.nav`
   position: fixed;

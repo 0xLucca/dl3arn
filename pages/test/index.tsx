@@ -85,14 +85,10 @@ function getStyles() {
     }
 
     .cards {
-      max-width: 1200px;
-      margin: 10vh auto;
-      > div {
-        margin: 1rem 0;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem 3rem;
-      }
+      margin: 1rem 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem 3rem;
     }
   `;
 }
