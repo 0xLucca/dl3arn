@@ -59,7 +59,7 @@ interface CardProps {
   instructor: string;
   name: string;
   total_time: string;
-  score: string;
+  score: number;
 }
 function Card({ instructor, name, total_time, score, image }: CardProps) {
   return (
