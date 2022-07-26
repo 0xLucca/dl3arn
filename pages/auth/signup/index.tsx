@@ -37,7 +37,7 @@ function Signup() {
           </form>
           <p className="signup">
             Already have an account?{" "}
-            <Link href="/auth/login">
+            <Link href="/auth/signin">
               <a className="link">Sign in</a>
             </Link>
           </p>

@@ -22,7 +22,7 @@ function Login() {
       <Main>
         <div>
           <form onSubmit={onSubmit} className="form">
-            <h1>Login</h1>
+            <h1>Sign in</h1>
             <div className="inputs">
               {Object.entries(inputs).map(([name, data]) => (
                 <Input
