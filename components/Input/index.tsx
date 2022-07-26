@@ -2,13 +2,18 @@ import { HTMLProps } from "react";
 import styled from "styled-components";
 
 const Label = styled.label`
-  border-radius: 5px;
+  input {
+    padding: 0.5rem 0.5rem;
+  }
 `;
 
-interface Props extends HTMLProps<HTMLInputElement> {}
-function Input({ className, ...input }: Props) {
+interface Props extends Omit<HTMLProps<HTMLInputElement>, "label"> {
+  label?: React.ReactNode;
+}
+function Input({ className, label, ...input }: Props) {
   return (
     <Label className={className}>
+      {label && <span>{label}</span>}
       <input {...input} />
     </Label>
   );
