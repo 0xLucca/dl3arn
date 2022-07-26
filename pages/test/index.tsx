@@ -13,6 +13,9 @@ import CardPlaceholder from "../../components/Placeholders/Card";
 import { NODE_ENV } from "../../constants";
 import useCourses from "../../hooks/useCourses";
 
+const getDescription = () =>
+  `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi sequi, harum dolorem ullam adipisci optio architecto necessitatibus nesciunt ab soluta, quisquam natus cum provident amet officia fuga. Aspernatur, alias quasi?`;
+
 const Container = getStyles();
 function Test() {
   const { courses, isLoading } = useCourses();
@@ -38,7 +41,7 @@ function Test() {
           <h2>courses</h2>
 
           <div>
-            {Array.from({ length: 8 }).map((_, i) =>
+            {Array.from({ length: 19 }).map((_, i) =>
               !isLoading ? (
                 <Card
                   key={i}
@@ -48,6 +51,7 @@ function Test() {
                   score={courses[i].score}
                   instructor={courses[i].instructor}
                   image={courses[i].image}
+                  description={i === 0 ? getDescription() : undefined}
                 />
               ) : (
                 <CardPlaceholder />
@@ -69,6 +73,7 @@ function getStyles() {
       max-width: 1200px;
       margin: 0 auto;
     }
+
     .buttons {
       > div {
         max-width: 300px;

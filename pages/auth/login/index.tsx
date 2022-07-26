@@ -1,47 +1,12 @@
 import Link from "next/link";
 import { useState } from "react";
-import styled from "styled-components";
 
-import { PrimaryButton } from "../../../components/Buttons";
 import Input from "@/components/Input";
+import { PrimaryButton } from "@/components/Buttons";
+import { Container, Form } from "@/components/Login";
+
 import { InputChange } from "@/types/";
 
-const Container = styled.main`
-  display: grid;
-  place-items: center;
-  height: 100vh;
-  margin: 0 auto;
-
-  .link {
-    font-weight: 600;
-    color: #5af;
-  }
-  > div {
-    width: 481px;
-  }
-
-  .signup {
-    margin: 1rem 0 0 0;
-  }
-`;
-const Form = styled.form`
-  gap: 1rem;
-
-  &,
-  .inputs {
-    display: flex;
-    flex-flow: column;
-    width: 100%;
-  }
-
-  .inputs {
-    gap: 0.5rem;
-    label,
-    input {
-      width: 100%;
-    }
-  }
-`;
 function Login() {
   const [inputs, setInputs] = useState({
     email: "",

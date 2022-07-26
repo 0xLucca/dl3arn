@@ -14,7 +14,7 @@ function Input({ className, label, ...input }: Props) {
   return (
     <Label className={className}>
       {label && <span>{label}</span>}
-      <input {...input} />
+      <input autoComplete="off" {...input} />
     </Label>
   );
 }

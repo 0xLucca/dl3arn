@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 const Placeholder = styled.span<{ width: string; height: string }>`
   display: block;
-  background-color: #0002;
   border-radius: 5px;
 
   ${({ width, height }) =>
@@ -11,7 +10,8 @@ const Placeholder = styled.span<{ width: string; height: string }>`
       height: ${height};
     `}
 
-  background: linear-gradient(-90deg, #aaa 50%, #ddd, #aaa 75%);
+  --bg: #ddd;
+  background: linear-gradient(-90deg, var(--bg) 50%, #eee, var(--bg) 75%);
   background-size: 400% 400%;
   animation: gradient 2s linear infinite;
 
@@ -31,6 +31,7 @@ const Placeholder = styled.span<{ width: string; height: string }>`
 const Container = styled.div`
   display: flex;
   flex-flow: column;
+  padding: 1rem;
   gap: 1rem;
 
   .footer {
@@ -62,7 +63,7 @@ function CardPlaceholder() {
   return (
     <Container>
       <div>
-        <Placeholder width="100%" height="9.5rem" />
+        <Placeholder width="100%" height="10rem" />
       </div>
       <div className="footer">
         <div className="info">

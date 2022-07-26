@@ -3,14 +3,23 @@ import { Course } from "../../utils/types";
 import { PrimaryButton } from "../Buttons";
 import { Container } from "./styles";
 
-interface CardProps extends Course {}
-function Card({ instructor, name, time, score, image }: CardProps) {
+interface CardProps extends Course {
+  description?: string;
+}
+function Card({
+  description,
+  instructor,
+  name,
+  time,
+  score,
+  image,
+}: CardProps) {
   return (
     <Container>
       <header>
         <Image
           className="img"
-          layout="responsive"
+          layout="fill"
           width={1920}
           height={1080}
           src={image}
@@ -19,7 +28,7 @@ function Card({ instructor, name, time, score, image }: CardProps) {
       </header>
 
       <footer>
-        <div className="description">
+        <div className="info">
           <div>
             <h3 className="name">{name}</h3>
             <p className="instructor">{`by ${instructor}`}</p>
@@ -29,6 +38,15 @@ function Card({ instructor, name, time, score, image }: CardProps) {
             <p>{score}</p>
           </div>
         </div>
+
+        {description && (
+          <p className="description">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
+            sequi, harum dolorem ullam adipisci optio architecto necessitatibus
+            nesciunt ab soluta, quisquam natus cum provident amet officia fuga.
+            Aspernatur, alias quasi?
+          </p>
+        )}
 
         <PrimaryButton className="btn">View course</PrimaryButton>
       </footer>

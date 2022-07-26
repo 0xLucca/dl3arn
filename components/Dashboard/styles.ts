@@ -10,8 +10,10 @@ export const Container = styled.article`
   border-radius: 0.25rem;
 
   header {
+    position: relative;
     display: block;
     width: 100%;
+    height: 10rem;
 
     .img {
       object-fit: cover;
@@ -20,7 +22,7 @@ export const Container = styled.article`
   }
 
   footer {
-    .description {
+    .info {
       display: flex;
       flex-flow: row;
       align-items: center;
@@ -48,6 +50,58 @@ export const Container = styled.article`
     .btn {
       margin: 1rem 0 0 0;
       font-size: 0.8rem;
+    }
+  }
+
+  :first-child {
+    align-items: center;
+    flex-flow: row;
+    grid-area: 1 / 1 / 2 / 3;
+
+    header {
+      width: 100%;
+      height: 100%;
+
+      .img {
+        object-fit: cover;
+        border-radius: 0.25rem;
+      }
+    }
+
+    footer {
+      display: flex;
+      flex-flow: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+
+      .info {
+        flex-flow: column;
+        align-items: flex-start;
+        .name {
+          font-size: 2rem;
+          font-weight: 800;
+          letter-spacing: 2px;
+        }
+        .meta {
+          flex-flow: row;
+          gap: 1rem;
+          font-weight: 500;
+          margin: 0.25rem 0;
+        }
+      }
+      .description {
+        position: relative;
+        max-height: calc(1.25rem * 5);
+        line-height: 1.25rem;
+        letter-spacing: 1px;
+        font-weight: 300;
+        font-size: 0.9rem;
+        text-overflow: ellipsis;
+        overflow-y: scroll;
+        padding: 0 0.5rem 0.5rem 0;
+        word-wrap: break-word;
+      }
     }
   }
 `;
