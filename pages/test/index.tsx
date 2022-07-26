@@ -54,7 +54,7 @@ function Test() {
                   description={i === 0 ? getDescription() : undefined}
                 />
               ) : (
-                <CardPlaceholder />
+                <CardPlaceholder key={`card-placeholder-${i}`} />
               )
             )}
           </div>

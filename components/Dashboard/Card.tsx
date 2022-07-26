@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ClockIcon, FireIcon } from "utils/icons";
 import { Course } from "../../utils/types";
 import { PrimaryButton } from "../Buttons";
 import { Container } from "./styles";
@@ -34,8 +35,12 @@ function Card({
             <p className="instructor">{`by ${instructor}`}</p>
           </div>
           <div className="meta">
-            <time>{time}</time>
-            <p>{score}</p>
+            <time>
+              <ClockIcon size={14} /> {time}
+            </time>
+            <p>
+              <FireIcon size={14} /> {score}
+            </p>
           </div>
         </div>
 

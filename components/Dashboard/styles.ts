@@ -45,6 +45,12 @@ export const Container = styled.article`
         align-items: flex-end;
         font-size: 0.85rem;
         opacity: 0.65;
+        > * {
+          gap: 0.5rem;
+          display: flex;
+          align-items: center;
+          flex-flow: row-reverse;
+        }
       }
     }
     .btn {
@@ -88,6 +94,9 @@ export const Container = styled.article`
           gap: 1rem;
           font-weight: 500;
           margin: 0.25rem 0;
+          > * {
+            flex-flow: row;
+          }
         }
       }
       .description {
