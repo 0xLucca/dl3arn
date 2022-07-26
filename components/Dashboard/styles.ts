@@ -36,8 +36,8 @@ export const Container = styled.article`
       }
       .instructor {
         font-size: 0.8rem;
-        opacity: 0.4;
-        font-weight: 300;
+        opacity: 0.5;
+        font-weight: 400;
       }
       .meta {
         display: flex;

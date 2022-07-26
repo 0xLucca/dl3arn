@@ -6,7 +6,7 @@ export const PrimaryButton = styled(Button)`
   color: #fff;
 
   :hover {
-    box-shadow: 0 0.25rem 0.5rem #0002;
+    background-color: #333355;
   }
 `;
 
@@ -18,7 +18,7 @@ export const SecondaryButton = styled(Button)`
   color: var(--color);
 
   :hover {
-    box-shadow: 0 0.25rem 0.5rem #0002;
+    background-color: #fafafa;
   }
 `;
 
