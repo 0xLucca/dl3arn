@@ -8,6 +8,10 @@ import {
   signInWithEmailAndPassword,
   UserInfo,
   updateProfile,
+  updateEmail,
+  updatePassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
 } from "firebase/auth";
 
 import { LoginUser, RegisterUser } from "@/types/firebase";
@@ -32,7 +36,30 @@ export const loginUser: Login = async ({ email, password }) => {
 
 export const logout = () => auth.signOut();
 
-export const updateUser = async ({ photoURL }: { [key: string]: string }) => {
-  if (!auth.currentUser) return null;
-  return updateProfile(auth.currentUser, { photoURL });
+type UpdateProps = Partial<User & { password: string }> & {
+  current_password: string;
+};
+export const updateUser = async ({
+  email,
+  current_password,
+  password,
+  ...others
+}: UpdateProps) => {
+  if (!auth.currentUser || !auth.currentUser.email) return null;
+  const promises = [];
+
+  await updateProfile(auth.currentUser, others);
+
+  if (email || password) {
+    const credential = EmailAuthProvider.credential(
+      auth.currentUser.email,
+      current_password
+    );
+    await reauthenticateWithCredential(auth.currentUser, credential);
+    if (email) promises.push(updateEmail(auth.currentUser, email));
+    if (password) promises.push(updatePassword(auth.currentUser, password));
+
+    await Promise.all(promises);
+    logout();
+  }
 };

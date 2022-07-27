@@ -12,6 +12,7 @@ const defaults: Partial<User> = {};
 const initial = {
   email: { value: "" },
   password: { value: "" },
+  current_password: { value: "" },
   photoURL: { value: "" },
 };
 function Profile() {
@@ -25,9 +26,10 @@ function Profile() {
     const values = {
       email: inputs.email.value,
       password: inputs.password.value,
+      current_password: inputs.current_password.value,
       photoURL: inputs.photoURL.value,
     };
-    updateUser(values).then((res: any) => console.log(res));
+    updateUser(values);
   };
 
   return (
@@ -46,6 +48,12 @@ function Profile() {
               name="password"
               value={inputs.password.value}
               placeholder="password"
+            />
+            <Input
+              onChange={onChange}
+              name="current_password"
+              value={inputs.current_password.value}
+              placeholder="current password"
             />
           </div>
           <button type="submit">update</button>

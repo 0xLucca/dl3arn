@@ -18,8 +18,14 @@ const Container = styled.div`
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem 3rem;
+      @media screen and (min-width: 820px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @media screen and (min-width: 1200px) {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
   }
 `;
