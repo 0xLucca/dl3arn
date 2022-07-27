@@ -21,6 +21,10 @@ const Container = styled.button`
     height: 2.5rem;
     border-radius: 0.25rem;
     overflow: hidden;
+    .img {
+      object-fit: cover;
+      object-position: center;
+    }
   }
 `;
 
@@ -45,7 +49,14 @@ function Avatar({ img, isLoading, to, username, onClick }: Props) {
 
       {img ? (
         <div className="image-container">
-          <Image layout="fill" src={img} alt="" />
+          <Image
+            className="img"
+            layout="responsive"
+            height="2rem"
+            width="2rem"
+            src={img}
+            alt=""
+          />
         </div>
       ) : (
         <Placeholder width="2rem" height="2rem" />

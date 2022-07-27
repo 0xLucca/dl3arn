@@ -78,7 +78,6 @@ function Navbar() {
           {!isLoading && user ? (
             <div className="avatar">
               <Avatar
-                username={user.email}
                 img={user.photoURL}
                 onClick={handleMenu}
                 isLoading={isLoading}
