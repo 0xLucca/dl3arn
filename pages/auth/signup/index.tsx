@@ -1,20 +1,36 @@
+import { FormEvent, useEffect } from "react";
+import Head from "next/head";
 import Link from "next/link";
+
+import { registerUser } from "@/firebase/auth";
 
 import { PrimaryButton } from "@/components/Buttons";
 import Input from "@/components/Input";
 
-import useForm from "hooks/useForm";
-import { registerInputs } from "utils/inputs";
-import { Main } from "styles/auth";
-import { FormEvent } from "react";
-import Head from "next/head";
+import useForm from "@/hooks/useForm";
+import { registerInputs } from "@/utils/inputs";
+import { Main } from "@/styles/auth";
+import { useUser } from "context/firebase";
 
 function Signup() {
   const { inputs, onChange } = useForm(registerInputs);
+  const user = useUser();
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(inputs);
+    const values = {
+      email: inputs.email.value,
+      password: inputs.password.value,
+      validate: inputs.validate.value,
+    };
+
+    registerUser(values).then((userCredential) => {
+      if (!userCredential) return null;
+    });
   };
 
   return (

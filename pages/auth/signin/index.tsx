@@ -9,13 +9,23 @@ import { loginInputs } from "utils/inputs";
 import { Main } from "styles/auth";
 import { FormEvent } from "react";
 import Head from "next/head";
+import { loginUser } from "@/firebase/auth";
+import { useUser } from "context/firebase";
 
 function Login() {
   const { inputs, onChange } = useForm(loginInputs);
+  const user = useUser();
+  console.log(user);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(inputs);
+    const values = {
+      email: inputs.email.value,
+      password: inputs.password.value,
+    };
+    loginUser(values).then((userCredential) => {
+      if (!userCredential) return null;
+    });
   };
 
   return (

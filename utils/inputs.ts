@@ -19,8 +19,8 @@ const password: Input = {
   },
 };
 
-const verification: Input = {
-  value: "",
+const validate: Input = {
+  value: AUTH_PASSWORD || "",
   inputProps: {
     placeholder: "Verification",
     type: "password",
@@ -35,5 +35,5 @@ export const loginInputs: Inputs = {
 export const registerInputs: Inputs = {
   email,
   password,
-  verification,
+  validate,
 };
