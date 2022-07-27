@@ -5,7 +5,9 @@ import { updateUser } from "@/firebase/auth";
 import { User } from "firebase/auth";
 import useForm from "hooks/useForm";
 import Image from "next/image";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
+import { ProfileContainer } from "@/styles/profile.styles";
+import { PrimaryButton } from "components/Buttons";
 
 const defaults: Partial<User> = {};
 
@@ -34,8 +36,8 @@ function Profile() {
 
   return (
     <PrivateRoute>
-      <div style={{ padding: "5rem 0 0 0" }}>
-        <form onSubmit={onSubmit}>
+      <ProfileContainer>
+        <form className="credentials" onSubmit={onSubmit}>
           <div className="inputs">
             <Input
               onChange={onChange}
@@ -55,12 +57,6 @@ function Profile() {
               value={inputs.current_password.value}
               placeholder="current password"
             />
-          </div>
-          <button type="submit">update</button>
-        </form>
-
-        <form onSubmit={onSubmit}>
-          <div className="inputs">
             <Input
               onChange={onChange}
               name="image"
@@ -68,7 +64,7 @@ function Profile() {
               placeholder="Photo"
             />
           </div>
-          <button type="submit">update</button>
+          <PrimaryButton className="btn">update</PrimaryButton>
         </form>
 
         <h2>{email}</h2>
@@ -85,7 +81,7 @@ function Profile() {
             />
           </div>
         )}
-      </div>
+      </ProfileContainer>
     </PrivateRoute>
   );
 }
