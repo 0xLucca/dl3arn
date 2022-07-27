@@ -1,13 +1,18 @@
+import { PrimaryButton } from "components/Buttons";
+import { useUser } from "context/firebase";
+import { logout } from "@/firebase/auth";
+import Link from "next/link";
 import styled from "styled-components";
 import Avatar from "../Avatar";
 
 const Nav = styled.nav`
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
+  z-index: 9999;
   width: 100%;
   background-color: #fff;
-  height: 3rem;
+  height: 3.5rem;
 
   .wrapper,
   .menu,
@@ -33,19 +38,39 @@ const Nav = styled.nav`
     display: flex;
     align-items: center;
   }
+
+  .avatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
 `;
 function Navbar() {
+  const { user, isLoading } = useUser();
   return (
     <Nav>
       <div className="wrapper">
         <p>DL3arn</p>
 
+        <Link href={"/auth/signin"}>login</Link>
+
         <div className="menu">
-          <Avatar
-            username="estebanorlandi4"
-            img="https://picsum.photos/1920/1080?random=55"
-            onClick={() => console.log("hola")}
-          />
+          <div className="avatar">
+            {!isLoading && user ? (
+              <Avatar
+                username={user.email}
+                img={user.photoURL}
+                onClick={() => logout()}
+                isLoading={isLoading}
+              />
+            ) : (
+              <PrimaryButton>
+                <Link href="/auth/signin">
+                  <a>Login</a>
+                </Link>
+              </PrimaryButton>
+            )}
+          </div>
         </div>
       </div>
     </Nav>

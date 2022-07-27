@@ -11,14 +11,15 @@ import useForm from "@/hooks/useForm";
 import { registerInputs } from "@/utils/inputs";
 import { Main } from "@/styles/auth";
 import { useUser } from "context/firebase";
+import Router from "next/router";
 
 function Signup() {
   const { inputs, onChange } = useForm(registerInputs);
-  const user = useUser();
-
+  const { user, isLoading } = useUser();
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    if (!isLoading && user) Router.back();
+  }, [isLoading, user]);
+  if (isLoading || user) return null;
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();

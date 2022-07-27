@@ -7,15 +7,19 @@ import useForm from "hooks/useForm";
 import { loginInputs } from "utils/inputs";
 
 import { Main } from "styles/auth";
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import Head from "next/head";
 import { loginUser } from "@/firebase/auth";
 import { useUser } from "context/firebase";
+import Router from "next/router";
 
 function Login() {
   const { inputs, onChange } = useForm(loginInputs);
-  const user = useUser();
-  console.log(user);
+  const { user, isLoading } = useUser();
+  useEffect(() => {
+    if (!isLoading && user) Router.back();
+  }, [isLoading, user]);
+  if (isLoading || user) return null;
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -23,9 +27,7 @@ function Login() {
       email: inputs.email.value,
       password: inputs.password.value,
     };
-    loginUser(values).then((userCredential) => {
-      if (!userCredential) return null;
-    });
+    loginUser(values);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { authListener } from "@/firebase/auth";
-import { User, UserCredential } from "firebase/auth";
+import { User } from "firebase/auth";
 import {
   createContext,
   ReactNode,
@@ -25,7 +25,7 @@ function Provider({ children }: Props) {
   });
 
   useEffect(() => {
-    setUser((old) => ({ ...old, isLoading: true }));
+    setUser({ user: null, isLoading: true });
     authListener((user: User | null) => {
       if (user) return setUser({ user, isLoading: false });
       return setUser({ user: null, isLoading: false });

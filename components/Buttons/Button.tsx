@@ -2,6 +2,8 @@ import { HTMLAttributes, ReactNode } from "react";
 import styled from "styled-components";
 
 const BaseButton = styled.button`
+  display: block;
+
   width: 100%;
   padding: 0.75rem 1.25rem;
 

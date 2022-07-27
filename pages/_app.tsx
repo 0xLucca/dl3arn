@@ -6,6 +6,7 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { GlobalStyle } from "../utils/styled";
 import Provider from "context/firebase";
+import Navbar from "components/Navbar";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -45,6 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <GlobalStyle />
+          <Navbar />
           <Component {...pageProps} />
         </RainbowKitProvider>
       </WagmiConfig>
