@@ -6,6 +6,8 @@ import {
   NextOrObserver,
   User,
   signInWithEmailAndPassword,
+  UserInfo,
+  updateProfile,
 } from "firebase/auth";
 
 import { LoginUser, RegisterUser } from "@/types/firebase";
@@ -29,3 +31,8 @@ export const loginUser: Login = async ({ email, password }) => {
 };
 
 export const logout = () => auth.signOut();
+
+export const updateUser = async ({ photoURL }: { [key: string]: string }) => {
+  if (!auth.currentUser) return null;
+  return updateProfile(auth.currentUser, { photoURL });
+};

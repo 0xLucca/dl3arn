@@ -9,7 +9,7 @@ function PrivateRoute({ children }: Props) {
   const { user, isLoading } = useUser();
   if (isLoading) return null;
   if (!user) {
-    Router.back();
+    Router.push("/");
     return null;
   }
   return <>{children}</>;

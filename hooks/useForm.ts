@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { InputChange, Inputs } from "@/types/";
 
 function useForm(initialState: Inputs) {
-  const [inputs, setInputs] = useState<Inputs>(initialState);
+  const [inputs, setInputs] = useState<typeof initialState>(initialState);
 
   useEffect(() => {
     setInputs(initialState);

@@ -24,6 +24,8 @@ function Provider({ children }: Props) {
     isLoading: true,
   });
 
+  useEffect(() => console.debug(user.user), [user]);
+
   useEffect(() => {
     setUser({ user: null, isLoading: true });
     authListener((user: User | null) => {
@@ -34,7 +36,7 @@ function Provider({ children }: Props) {
 
   return (
     <firebaseContext.Provider value={{ user }}>
-      {children}
+      {!user.isLoading ? children : null}
     </firebaseContext.Provider>
   );
 }
