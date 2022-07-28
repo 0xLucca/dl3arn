@@ -1,7 +1,7 @@
 import Input from "components/Input";
 import PrivateRoute from "components/PrivateRoute";
 import { useUser } from "context/firebase";
-import { logout, updateUser } from "@/firebase/auth";
+import { logout, updateUser } from "services/firebase/auth";
 import { User } from "firebase/auth";
 import useForm from "hooks/useForm";
 import Image from "next/image";

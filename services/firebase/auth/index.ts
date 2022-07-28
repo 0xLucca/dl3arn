@@ -15,7 +15,7 @@ import {
 } from "firebase/auth";
 
 import { LoginUser, RegisterUser } from "@/types/firebase";
-import { app } from "@/firebase";
+import { app } from "services/firebase";
 import { loginWithGoogle } from "./google";
 
 export const auth = getAuth(app);

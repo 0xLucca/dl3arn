@@ -18,6 +18,10 @@ export const Container = styled.div`
       }
 
       .video {
+        border-radius: 0;
+        border: none;
+        background-color: transparent;
+        width: 100%;
         display: flex;
         flex-flow: row;
         align-items: center;

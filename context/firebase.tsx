@@ -1,4 +1,4 @@
-import { authListener } from "@/firebase/auth";
+import { authListener } from "services/firebase/auth";
 import { User } from "firebase/auth";
 import {
   createContext,

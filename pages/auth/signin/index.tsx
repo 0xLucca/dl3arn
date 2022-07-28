@@ -9,7 +9,7 @@ import { loginInputs } from "utils/inputs";
 import { Main } from "styles/auth";
 import { FormEvent, useEffect } from "react";
 import Head from "next/head";
-import { loginUser } from "@/firebase/auth";
+import { loginUser } from "services/firebase/auth";
 import { useUser } from "context/firebase";
 import Router from "next/router";
 

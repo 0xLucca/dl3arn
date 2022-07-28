@@ -2,7 +2,7 @@ import { FormEvent, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 
-import { registerUser } from "@/firebase/auth";
+import { registerUser } from "services/firebase/auth";
 
 import { PrimaryButton } from "@/components/Buttons";
 import Input from "@/components/Input";
