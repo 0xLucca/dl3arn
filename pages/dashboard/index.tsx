@@ -4,6 +4,7 @@ import Card from "@/components/Dashboard/Card";
 import CardPlaceholder from "@/components/Placeholders/Card";
 import PrivateRoute from "@/components/PrivateRoute";
 import useCourses from "@/hooks/useCourses";
+import Head from "next/head";
 
 const Container = styled.div`
   width: 90%;
@@ -34,6 +35,9 @@ function Dashboard() {
   const { courses, isLoading } = useCourses();
   return (
     <PrivateRoute verified>
+      <Head>
+        <title>DL3arn | Dashboard</title>
+      </Head>
       <Container>
         <main>
           <section>

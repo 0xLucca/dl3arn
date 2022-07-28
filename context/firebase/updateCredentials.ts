@@ -29,11 +29,13 @@ export const updateCredentials: UpdateCredentials = async (
   if (!email && !new_password) return;
 
   const credential = getCredential(auth.currentUser.email, password);
-  await reauthenticate(credential);
+  const res = await reauthenticate(credential);
+  if (!res) return;
 
   const updates = [];
   if (email) updates.push(updateEmail(auth.currentUser, email));
-  if (password) updates.push(updatePassword(auth.currentUser, password));
+  if (new_password)
+    updates.push(updatePassword(auth.currentUser, new_password));
 
   await Promise.all(updates);
   auth.signOut();

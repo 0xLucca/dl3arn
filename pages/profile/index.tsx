@@ -7,6 +7,7 @@ import Image from "next/image";
 import { FormEvent } from "react";
 import { ProfileContainer } from "@/styles/profile.styles";
 import { PrimaryButton } from "components/Buttons";
+import Head from "next/head";
 
 const defaults: Partial<User> = {};
 
@@ -21,6 +22,7 @@ function Profile() {
     data: { user },
     logout,
     updateUser,
+    updateCredentials,
   } = useAuth();
   const { email, photoURL, displayName } = user ? user : defaults;
 
@@ -28,10 +30,18 @@ function Profile() {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    const { current_password } = inputs;
     const values = {
       email: inputs.email.value,
       password: inputs.password.value,
-      current_password: inputs.current_password.value,
+    };
+    updateCredentials(current_password.value, values);
+  };
+
+  const updateData = (e: FormEvent) => {
+    e.preventDefault();
+    const values = {
       photoURL: inputs.photoURL.value,
     };
     updateUser(values);
@@ -39,6 +49,10 @@ function Profile() {
 
   return (
     <PrivateRoute>
+      <Head>
+        <title>DL3arn | Dashboard</title>
+      </Head>
+
       <ProfileContainer>
         <div className="info">
           {photoURL && (
@@ -72,9 +86,15 @@ function Profile() {
               value={inputs.current_password.value}
               placeholder="current password"
             />
+          </div>
+          <PrimaryButton className="btn">update</PrimaryButton>
+        </form>
+
+        <form className="credentials" onSubmit={updateData}>
+          <div className="inputs">
             <Input
               onChange={onChange}
-              name="image"
+              name="photoURL"
               value={inputs.photoURL.value}
               placeholder="Photo"
             />
