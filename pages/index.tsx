@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 
 const Home: NextPage = () => {
   const { user } = useUser();
-  if (user) Router.push("/dashboard");
+  if (user && user.emailVerified) Router.push("/dashboard");
   return (
     <div>
       <Head>

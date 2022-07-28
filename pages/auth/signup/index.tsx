@@ -17,9 +17,8 @@ function Signup() {
   const { inputs, onChange } = useForm(registerInputs);
   const { user, isLoading } = useUser();
   useEffect(() => {
-    if (!isLoading && user) Router.back();
+    if (!isLoading && user && user.emailVerified) Router.push("/");
   }, [isLoading, user]);
-  if (isLoading || user) return null;
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();

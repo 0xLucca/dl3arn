@@ -1,7 +1,7 @@
 import Input from "components/Input";
 import PrivateRoute from "components/PrivateRoute";
 import { useUser } from "context/firebase";
-import { updateUser } from "@/firebase/auth";
+import { logout, updateUser } from "@/firebase/auth";
 import { User } from "firebase/auth";
 import useForm from "hooks/useForm";
 import Image from "next/image";
@@ -19,7 +19,7 @@ const initial = {
 };
 function Profile() {
   const { user, isLoading } = useUser();
-  const { email, photoURL } = user ? user : defaults;
+  const { email, photoURL, displayName } = user ? user : defaults;
 
   const { inputs, onChange } = useForm(initial);
 
@@ -37,6 +37,24 @@ function Profile() {
   return (
     <PrivateRoute>
       <ProfileContainer>
+        <div className="info">
+          {photoURL && (
+            <div className="img-container">
+              <Image
+                width={1920}
+                height={1080}
+                layout="fill"
+                src={photoURL}
+                alt=""
+              />
+            </div>
+          )}
+
+          <div className="names">
+            {displayName && <h2 className="name">{displayName}</h2>}
+            <p className="email">{email}</p>
+          </div>
+        </div>
         <form className="credentials" onSubmit={onSubmit}>
           <div className="inputs">
             <Input
@@ -67,20 +85,7 @@ function Profile() {
           <PrimaryButton className="btn">update</PrimaryButton>
         </form>
 
-        <h2>{email}</h2>
-        {photoURL && (
-          <div style={{ width: "10rem", height: "10rem" }}>
-            <Image
-              width={1920}
-              height={1080}
-              objectFit="cover"
-              objectPosition="center"
-              layout="responsive"
-              src={photoURL}
-              alt=""
-            />
-          </div>
-        )}
+        <PrimaryButton onClick={logout}>Logout</PrimaryButton>
       </ProfileContainer>
     </PrivateRoute>
   );

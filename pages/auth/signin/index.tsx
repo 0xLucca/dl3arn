@@ -27,7 +27,11 @@ function Login() {
       email: inputs.email.value,
       password: inputs.password.value,
     };
-    loginUser(values);
+    loginUser(values, "email");
+  };
+
+  const loginWithGoogle = () => {
+    loginUser({}, "google");
   };
 
   return (
@@ -39,8 +43,9 @@ function Login() {
 
       <Main>
         <div>
+          <h1>Sign in</h1>
+          <button onClick={loginWithGoogle}>Google</button>
           <form onSubmit={onSubmit} className="form">
-            <h1>Sign in</h1>
             <div className="inputs">
               {Object.entries(inputs).map(([name, data]) => (
                 <Input

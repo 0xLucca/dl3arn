@@ -4,14 +4,17 @@ import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
+  verified?: boolean;
 }
-function PrivateRoute({ children }: Props) {
+const redirect = () => {
+  Router.push("/");
+  return null;
+};
+function PrivateRoute({ children, verified }: Props) {
   const { user, isLoading } = useUser();
   if (isLoading) return null;
-  if (!user) {
-    Router.push("/");
-    return null;
-  }
+  if (!user) return redirect();
+  if (verified && !user.emailVerified) return redirect();
   return <>{children}</>;
 }
 

@@ -33,7 +33,7 @@ const Container = styled.div`
 function Dashboard() {
   const { courses, isLoading } = useCourses();
   return (
-    <PrivateRoute>
+    <PrivateRoute verified>
       <Container>
         <main>
           <section>
