@@ -1,6 +1,6 @@
-import { PrimaryButton, SecondaryButton } from "components/Buttons";
+import { SecondaryButton } from "components/Buttons";
 import { useUser } from "context/firebase";
-import Link, { LinkProps } from "next/link";
+import Link from "next/link";
 import Router from "next/router";
 import { ReactNode } from "react";
 import Avatar from "../Avatar";

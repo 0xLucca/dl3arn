@@ -3,29 +3,36 @@ import { useEffect, useState } from "react";
 import Courses from "mockups/cards.json";
 import { ClockIcon } from "utils/icons";
 import { Container } from "styles/course.styles";
+import Head from "next/head";
 
 function Course() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { course } = useCourse({ id });
+  const { course, videos } = useCourse({ id });
 
   if (!course) return <div>course not found</div>;
 
   return (
     <Container>
+      <Head>
+        <title>DL3arn | {course.name}</title>
+      </Head>
       <main>
-        <ul className="videos">
-          {course.videos.map((video) => (
-            <li key={video.id} className={`video ${video.pay ? "pay" : ""}`}>
-              <p>{video.name}</p>
-              <span>
-                <ClockIcon />
-                {video.duration}
-              </span>
-            </li>
-          ))}
-        </ul>
+        <section className="videos">
+          <h2>Gratuitos</h2>
+          <ul>
+            {videos?.free.map((video) => (
+              <Video key={video.id} {...video} />
+            ))}
+          </ul>
+          <h2>Pagos</h2>
+          <ul>
+            {videos?.pay.map((video) => (
+              <Video key={video.id} {...video} />
+            ))}
+          </ul>
+        </section>
 
         <div className="course-content">
           <div>
@@ -57,15 +64,45 @@ function Course() {
 
 export default Course;
 
+type Video = typeof Courses[number]["videos"][number];
 function useCourse({ id }: { id?: string | string[] }) {
   const [course, setCourse] = useState<typeof Courses[number] | null>(null);
+  const [videos, setVideos] = useState<{ free: Video[]; pay: Video[] } | null>(
+    null
+  );
 
   useEffect(() => {
     if (!id || typeof id !== "string") return;
     const courses = Courses.find((course) => id === course.id);
     if (!courses) return setCourse(null);
+    const _videos: { free: Video[]; pay: Video[] } = { free: [], pay: [] };
+    courses.videos.forEach((video) => {
+      if (video.pay) return _videos.pay.push(video);
+      return _videos.free.push(video);
+    });
+    setVideos(_videos);
     return setCourse(courses);
   }, [id]);
 
-  return { course };
+  return { course, videos };
+}
+
+function Video({
+  pay,
+  name,
+  duration,
+}: {
+  pay: boolean;
+  name: string;
+  duration: string;
+}) {
+  return (
+    <li className={`video ${pay ? "pay" : ""}`}>
+      <p>{name}</p>
+      <span>
+        {duration}
+        <ClockIcon />
+      </span>
+    </li>
+  );
 }

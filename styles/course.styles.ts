@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   main {
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 15rem 1fr;
     min-height: 100vh;
@@ -9,8 +11,19 @@ export const Container = styled.div`
     .videos {
       list-style: none;
       background-color: #efefef;
+      h2 {
+        font-size: 1.25rem;
+        padding: 0.5rem 1rem;
+        background-color: #0000000e;
+      }
+
       .video {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: space-between;
         padding: 1rem;
+
         p {
           font-weight: 500;
         }
@@ -20,6 +33,9 @@ export const Container = styled.div`
           gap: 0.25rem;
           font-size: 0.8rem;
         }
+      }
+      .video.pay {
+        opacity: 0.25;
       }
     }
 

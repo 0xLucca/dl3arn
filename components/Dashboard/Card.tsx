@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Router from "next/router";
 import { ClockIcon, FireIcon } from "utils/icons";
 import { Course } from "../../utils/types";
 import { PrimaryButton } from "../Buttons";
@@ -8,6 +9,7 @@ interface CardProps extends Course {
   description?: string;
 }
 function Card({
+  id,
   description,
   instructor,
   name,
@@ -53,7 +55,12 @@ function Card({
           </p>
         )}
 
-        <PrimaryButton className="btn">View course</PrimaryButton>
+        <PrimaryButton
+          onClick={() => Router.push(`/course/${id}`)}
+          className="btn"
+        >
+          View course
+        </PrimaryButton>
       </footer>
     </Container>
   );
