@@ -1,7 +1,6 @@
 import Input from "components/Input";
 import PrivateRoute from "components/PrivateRoute";
-import { useUser } from "context/firebase";
-import { logout, updateUser } from "services/firebase/auth";
+import { useAuth } from "context/firebase";
 import { User } from "firebase/auth";
 import useForm from "hooks/useForm";
 import Image from "next/image";
@@ -18,7 +17,11 @@ const initial = {
   photoURL: { value: "" },
 };
 function Profile() {
-  const { user, isLoading } = useUser();
+  const {
+    data: { user },
+    logout,
+    updateUser,
+  } = useAuth();
   const { email, photoURL, displayName } = user ? user : defaults;
 
   const { inputs, onChange } = useForm(initial);
@@ -40,13 +43,7 @@ function Profile() {
         <div className="info">
           {photoURL && (
             <div className="img-container">
-              <Image
-                width={1920}
-                height={1080}
-                layout="fill"
-                src={photoURL}
-                alt=""
-              />
+              <Image layout="fill" src={photoURL} alt="" />
             </div>
           )}
 

@@ -1,4 +1,4 @@
-import { useUser } from "context/firebase";
+import { useAuth } from "context/firebase";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
 
@@ -8,7 +8,8 @@ interface Props {
 }
 
 function PrivateRoute({ children, verified }: Props) {
-  const { user, isLoading } = useUser();
+  const { data } = useAuth();
+  const { user, isLoading } = data;
   const router = useRouter();
 
   useEffect(() => {

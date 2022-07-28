@@ -1,5 +1,5 @@
 import { SecondaryButton } from "components/Buttons";
-import { useUser } from "context/firebase";
+import { useAuth } from "context/firebase";
 import Link from "next/link";
 import Router from "next/router";
 import { ReactNode } from "react";
@@ -13,7 +13,8 @@ const NavLink = ({ children, href }: { children: ReactNode; href: string }) => (
 );
 
 function Navbar() {
-  const { user, isLoading } = useUser();
+  const { data } = useAuth();
+  const { user, isLoading } = data;
 
   return (
     <Nav>
@@ -44,7 +45,7 @@ function Navbar() {
             </>
           ) : (
             <SecondaryButton className="login">
-              <Link href="/auth/signin">
+              <Link href="/auth/login">
                 <a>Login</a>
               </Link>
             </SecondaryButton>

@@ -20,14 +20,7 @@ function Card({
   return (
     <Container>
       <header>
-        <Image
-          className="img"
-          layout="fill"
-          width={1920}
-          height={1080}
-          src={image}
-          alt=""
-        />
+        <Image className="img" layout="fill" src={image} alt="" />
       </header>
 
       <footer>

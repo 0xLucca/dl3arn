@@ -2,20 +2,21 @@ import { FormEvent, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 
-import { registerUser } from "services/firebase/auth";
-
 import { PrimaryButton } from "@/components/Buttons";
 import Input from "@/components/Input";
 
 import useForm from "@/hooks/useForm";
 import { registerInputs } from "@/utils/inputs";
 import { Main } from "@/styles/auth";
-import { useUser } from "context/firebase";
+import { useAuth } from "context/firebase";
 import Router from "next/router";
 
 function Signup() {
   const { inputs, onChange } = useForm(registerInputs);
-  const { user, isLoading } = useUser();
+  const {
+    data: { user, isLoading },
+    signUp,
+  } = useAuth();
   useEffect(() => {
     if (!isLoading && user && user.emailVerified) Router.push("/");
   }, [isLoading, user]);
@@ -28,9 +29,7 @@ function Signup() {
       validate: inputs.validate.value,
     };
 
-    registerUser(values).then((userCredential) => {
-      if (!userCredential) return null;
-    });
+    signUp(values);
   };
 
   return (

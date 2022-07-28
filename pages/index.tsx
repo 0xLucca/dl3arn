@@ -1,12 +1,19 @@
-import { useUser } from "context/firebase";
+import { useAuth } from "context/firebase";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Router from "next/router";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Footer from "../components/Footer";
 
 const Home: NextPage = () => {
-  const { user } = useUser();
-  if (user && user.emailVerified) Router.push("/dashboard");
+  const { data } = useAuth();
+  const { user, isLoading } = data;
+
+  const router = useRouter();
+  useEffect(() => {
+    if (!isLoading && user && user.emailVerified) router.push("/dashboard");
+  }, [user, isLoading, router]);
+
   return (
     <div>
       <Head>

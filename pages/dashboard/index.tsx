@@ -41,7 +41,7 @@ function Dashboard() {
             <div className="cards">
               {Array.from({ length: 19 }).map((_, i) =>
                 isLoading ? (
-                  <CardPlaceholder />
+                  <CardPlaceholder key={i} />
                 ) : (
                   <Card
                     key={i}

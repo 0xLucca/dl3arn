@@ -21,7 +21,7 @@ function useCourses(): Data {
           courses: cards.sort((card1, card2) => card2.score - card1.score),
           isLoading: false,
         }));
-      }, 2000);
+      }, 500);
     };
     p();
   }, []);

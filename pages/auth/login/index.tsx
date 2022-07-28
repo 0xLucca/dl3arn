@@ -9,13 +9,15 @@ import { loginInputs } from "utils/inputs";
 import { Main } from "styles/auth";
 import { FormEvent, useEffect } from "react";
 import Head from "next/head";
-import { loginUser } from "services/firebase/auth";
-import { useUser } from "context/firebase";
+import { useAuth } from "context/firebase";
 import Router from "next/router";
 
 function Login() {
   const { inputs, onChange } = useForm(loginInputs);
-  const { user, isLoading } = useUser();
+  const {
+    data: { user, isLoading },
+    login,
+  } = useAuth();
   useEffect(() => {
     if (!isLoading && user) Router.back();
   }, [isLoading, user]);
@@ -27,11 +29,11 @@ function Login() {
       email: inputs.email.value,
       password: inputs.password.value,
     };
-    loginUser(values, "email");
+    login!(values, "email");
   };
 
   const loginWithGoogle = () => {
-    loginUser({}, "google");
+    login!({}, "google");
   };
 
   return (
