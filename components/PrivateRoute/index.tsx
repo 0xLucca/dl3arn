@@ -1,20 +1,21 @@
 import { useUser } from "context/firebase";
-import Router from "next/router";
-import { ReactNode } from "react";
+import { useRouter } from "next/router";
+import { ReactNode, useEffect } from "react";
 
 interface Props {
   children: ReactNode;
   verified?: boolean;
 }
-const redirect = () => {
-  Router.push("/");
-  return null;
-};
+
 function PrivateRoute({ children, verified }: Props) {
   const { user, isLoading } = useUser();
-  if (isLoading) return null;
-  if (!user) return redirect();
-  if (verified && !user.emailVerified) return redirect();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!user || (verified && !user.emailVerified)) router.push("/");
+  }, [user, isLoading, verified, router]);
+
   return <>{children}</>;
 }
 
