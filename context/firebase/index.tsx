@@ -6,13 +6,16 @@ import {
   useEffect,
   useState,
 } from "react";
-import auth from "services/firebase/auth";
 import { FirebaseContext, UserData } from "utils/types/firebase";
-import { login } from "./login";
-import { logout } from "./logout";
-import { signUp } from "./signUp";
-import { updateCredentials } from "./updateCredentials";
-import { updateUser } from "./updateUser";
+import { auth } from "services/firebase";
+
+import {
+  login,
+  logout,
+  signUp,
+  updateCredentials,
+  updateUser,
+} from "services/firebase/auth";
 
 const initial = {
   auth: {

@@ -4,7 +4,7 @@ import {
   updateEmail,
   updatePassword,
 } from "firebase/auth";
-import auth from "services/firebase/auth";
+import { auth } from "services/firebase";
 import {
   GetEmailCredentials,
   Reauthenticate,

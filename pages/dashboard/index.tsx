@@ -5,6 +5,8 @@ import CardPlaceholder from "@/components/Placeholders/Card";
 import PrivateRoute from "@/components/PrivateRoute";
 import useCourses from "@/hooks/useCourses";
 import Head from "next/head";
+import { PrimaryButton } from "components/Buttons";
+import createDoc from "services/firebase/store/create";
 
 const Container = styled.div`
   width: 90%;
@@ -40,6 +42,7 @@ function Dashboard() {
       </Head>
       <Container>
         <main>
+          <PrimaryButton onClick={createDoc}>Test firestore</PrimaryButton>
           <section>
             <h2>courses</h2>
             <div className="cards">

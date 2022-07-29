@@ -1,7 +1,6 @@
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
-import auth from "services/firebase/auth";
-import googleProvider from "services/firebase/auth/google";
+import { auth, googleProvider } from "services/firebase";
 
 import { Login } from "utils/types/firebase";
 

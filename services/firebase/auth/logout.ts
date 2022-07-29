@@ -1,3 +1,3 @@
-import auth from "services/firebase/auth";
+import { auth } from "services/firebase";
 
 export const logout = () => auth.signOut();

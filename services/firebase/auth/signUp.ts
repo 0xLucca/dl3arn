@@ -3,7 +3,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 
-import auth from "services/firebase/auth";
+import { auth } from "services/firebase";
 
 import { EmailRegister } from "utils/types/firebase";
 

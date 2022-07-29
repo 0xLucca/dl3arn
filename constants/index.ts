@@ -1,6 +1,15 @@
 export const NODE_ENV = process.env.NODE_ENV;
 
 /* -------------------- FIREBASE -------------------- */
+export const FIREBASE_API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+export const FIREBASE_APP_ID = process.env.NEXT_PUBLIC_API_KEY;
+export const FIREBASE_AUTH_DOMAIN = process.env.NEXT_PUBLIC_API_KEY;
+
+export const FIREBASE_PROJECT_ID = process.env.NEXT_PUBLIC_API_KEY;
+export const FIREBASE_STORAGE_BUCKET = process.env.NEXT_PUBLIC_API_KEY;
+export const FIREBASE_MESSAGING_SENDER_ID = process.env.NEXT_PUBLIC_API_KEY;
+
+export const FIREBASE_DATABASE_URL = process.env.NEXT_PUBLIC_API_KEY;
 
 /* -------------------- TESTING -------------------- */
 export const AUTH_EMAIL = process.env.NEXT_PUBLIC_AUTH_EMAIL;
