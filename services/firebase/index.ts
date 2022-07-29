@@ -1,6 +1,12 @@
-import { FirebaseOptions, initializeApp } from "firebase/app";
+import {
+  FirebaseApp,
+  FirebaseOptions,
+  getApp,
+  getApps,
+  initializeApp,
+} from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 const config: FirebaseOptions = {
   appId: "1:896212070319:web:fb0f83cfd29b0ddcbdc95a",
@@ -14,7 +20,11 @@ const config: FirebaseOptions = {
   databaseURL: "https://dev-dl3arn.firebaseio.com",
 };
 
-export const app = initializeApp(config);
+const NAME = "app";
+
+const app: FirebaseApp = !getApps().length
+  ? initializeApp(config, NAME)
+  : getApp(NAME);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);

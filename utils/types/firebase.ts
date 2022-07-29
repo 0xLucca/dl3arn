@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 
 /* -------------------- PROVIDERS -------------------- */
-export type Provider = "email" | "google" | null;
+export type Provider = "email" | "google";
 
 /* -------------------- PARAMS -------------------- */
 export interface RegisterParams {
@@ -31,7 +31,7 @@ export type AuthResponse = Promise<UserCredential | null> | void;
 
 /* -------------------- FUNCTIONS -------------------- */
 export type EmailRegister = (_: RegisterParams) => AuthResponse;
-export type Login = (_: LoginParams, provider: Provider) => AuthResponse;
+export type Login = (_: LoginParams, provider?: Provider) => AuthResponse;
 export type GetEmailCredentials = (
   email: string,
   password: string

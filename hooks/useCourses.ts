@@ -1,32 +1,38 @@
-import cards from "../mockups/cards.json";
-import { useEffect, useState } from "react";
-import { Course } from "../utils/types";
+import { useCallback, useEffect, useState } from "react";
+import getCourses from "services/firebase/store/getCourses";
+
+import Course from "../utils/types/Course";
 
 interface Data {
   isLoading: boolean;
   courses: Course[];
 }
-function useCourses(): Data {
+function useCourses() {
   const [data, setData] = useState<Data>({
     isLoading: true,
     courses: [],
   });
 
-  useEffect(() => {
-    const p = async () => {
-      setData((old) => ({ ...old, isLoading: true }));
-      setTimeout(() => {
-        setData((old) => ({
-          ...old,
-          courses: cards.sort((card1, card2) => card2.score - card1.score),
-          isLoading: false,
-        }));
-      }, 500);
-    };
-    p();
+  const fetchCourses = useCallback(async () => {
+    setData((old) => ({ ...old, data: { courses: [], isLoading: true } }));
+    const courses = await getCourses();
+    setData((old) => ({
+      ...old,
+      courses,
+      isLoading: false,
+    }));
   }, []);
 
-  return data;
+  useEffect(() => {
+    fetchCourses();
+    return () => {};
+  }, [fetchCourses]);
+
+  const refetch = async () => {
+    fetchCourses();
+  };
+
+  return { data, refetch };
 }
 
 export default useCourses;

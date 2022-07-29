@@ -6,7 +6,7 @@ import PrivateRoute from "@/components/PrivateRoute";
 import useCourses from "@/hooks/useCourses";
 import Head from "next/head";
 import { PrimaryButton } from "components/Buttons";
-import createDoc from "services/firebase/store/create";
+import createCourse from "services/firebase/store/createCourse";
 
 const Container = styled.div`
   width: 90%;
@@ -34,7 +34,16 @@ const Container = styled.div`
 `;
 
 function Dashboard() {
-  const { courses, isLoading } = useCourses();
+  const {
+    data: { courses, isLoading },
+    refetch,
+  } = useCourses();
+
+  const handleCreation = async () => {
+    await createCourse();
+    refetch();
+  };
+
   return (
     <PrivateRoute verified>
       <Head>
@@ -42,7 +51,7 @@ function Dashboard() {
       </Head>
       <Container>
         <main>
-          <PrimaryButton onClick={createDoc}>Test firestore</PrimaryButton>
+          <PrimaryButton onClick={handleCreation}>Test firestore</PrimaryButton>
           <section>
             <h2>courses</h2>
             <div className="cards">
@@ -50,16 +59,18 @@ function Dashboard() {
                 isLoading ? (
                   <CardPlaceholder key={i} />
                 ) : (
-                  <Card
-                    key={i}
-                    id={courses[i].id}
-                    name={courses[i].name}
-                    time={courses[i].time}
-                    score={courses[i].score}
-                    instructor={courses[i].instructor}
-                    image={courses[i].image}
-                    description={i === 0 ? getDescription() : undefined}
-                  />
+                  courses[i] && (
+                    <Card
+                      key={i}
+                      uid={courses[i].uid}
+                      name={courses[i].name}
+                      total_duration={courses[i].total_duration}
+                      score={courses[i].score}
+                      instructor={courses[i].instructor}
+                      image={courses[i].image}
+                      description={i === 0 ? getDescription() : undefined}
+                    />
+                  )
                 )
               )}
             </div>

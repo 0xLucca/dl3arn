@@ -18,7 +18,7 @@ function Signup() {
     signUp,
   } = useAuth();
   useEffect(() => {
-    if (!isLoading && user && user.emailVerified) Router.push("/");
+    if (!isLoading && user) Router.push("/");
   }, [isLoading, user]);
 
   const onSubmit = (e: FormEvent) => {
@@ -57,7 +57,7 @@ function Signup() {
           </form>
           <p className="signup">
             Already have an account?{" "}
-            <Link href="/auth/signin">
+            <Link href="/auth/login">
               <a className="link">Sign in</a>
             </Link>
           </p>

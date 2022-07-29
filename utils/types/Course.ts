@@ -1,25 +1,31 @@
-interface Instructor {
+export interface Instructor {
   name: string;
 }
-interface Video {
+export interface Video {
   name: string;
   duration: string;
 }
 
-interface Course {
+export interface Course {
+  uid: string;
   name: string;
-  description: string;
+  description?: string;
   total_duration: string;
+  score: number;
+  image: string;
   instructor: Instructor;
   videos: Video[];
 }
 
 export default Course;
 
-const course: Course = {
+const course: Omit<Course, "uid"> = {
   name: "Learn Figma",
   description: "Lorem ipsum dolor sit amet",
   total_duration: "6h 50min",
+  score: 5,
+  image: "https://picsum.photo/1920/1080",
+
   instructor: { name: "Elmer Hallowell" },
   videos: [
     { name: "Figma basics", duration: "30min" },

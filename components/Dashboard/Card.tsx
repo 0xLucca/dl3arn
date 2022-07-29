@@ -1,19 +1,17 @@
 import Image from "next/image";
 import Router from "next/router";
 import { ClockIcon, FireIcon } from "utils/icons";
-import { Course } from "../../utils/types";
+import Course from "utils/types/Course";
 import { PrimaryButton } from "../Buttons";
 import { Container } from "./styles";
 
-interface CardProps extends Course {
-  description?: string;
-}
+interface CardProps extends Omit<Course, "videos"> {}
 function Card({
-  id,
+  uid,
   description,
   instructor,
   name,
-  time,
+  total_duration,
   score,
   image,
 }: CardProps) {
@@ -27,11 +25,11 @@ function Card({
         <div className="info">
           <div>
             <h3 className="name">{name}</h3>
-            <p className="instructor">{`by ${instructor}`}</p>
+            <p className="instructor">{`by ${instructor.name}`}</p>
           </div>
           <div className="meta">
             <time>
-              <ClockIcon size={14} /> {time}
+              <ClockIcon size={14} /> {total_duration}
             </time>
             <p>
               <FireIcon size={14} /> {score}
@@ -49,7 +47,7 @@ function Card({
         )}
 
         <PrimaryButton
-          onClick={() => Router.push(`/course/${id}`)}
+          onClick={() => Router.push(`/course/${uid}`)}
           className="btn"
         >
           View course

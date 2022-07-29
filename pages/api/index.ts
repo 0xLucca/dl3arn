@@ -5,7 +5,13 @@ import { db } from "services/firebase";
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const data = await getDocs(collection(db, "test-course"));
 
-  res.status(200).json({ data: data.docs.map((doc) => doc.data()) });
+  const {
+    body: { token },
+  } = req;
+
+  if (!token) return res.status(401).json({});
+
+  res.status(200).json({ data });
 }
 
 export default handler;
