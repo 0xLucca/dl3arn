@@ -1,8 +1,9 @@
 import { useAuth } from "context/firebase";
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import privateRoute from "utils/privateRoute";
 import Footer from "../components/Footer";
 
 const Home: NextPage = () => {
@@ -32,4 +33,12 @@ const Home: NextPage = () => {
   );
 };
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const isUnauthenticated = await privateRoute(context);
+  if (isUnauthenticated) return { props: {} };
+  return {
+    props: {},
+    redirect: { destination: "/dashboard", permanent: false },
+  };
+};
 export default Home;

@@ -5,10 +5,17 @@ import { videosCollection } from "services/firebase/store/collections";
 
 const userHasVideo = (_address: string) => true;
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id, token } = req.body;
+const isAuthorized = async (cookies: { [key: string]: string | undefined }) => {
+  const { token } = cookies;
+  if (!token || typeof token !== "string") return null;
+  const user = await auth.verifyIdToken(token);
+  if (!user) return null;
+  return user;
+};
 
-  const current_user = await auth.verifyIdToken(token);
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { id } = req.body;
+  const user = await isAuthorized(req.cookies);
 
   const ref = await getDoc(doc(videosCollection, id));
   const data = ref.data();

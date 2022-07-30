@@ -65,15 +65,15 @@ function useTest() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: "2nkDIwmSXL7HNBvOvCSH",
-          token: (await auth.currentUser?.getIdToken()) || null,
         }),
+        credentials: "same-origin",
         method: "POST",
       }).then((res) => res.json());
 
       if (!data) return setData(data as null);
       return setData(data as Video);
     };
-    // p();
+    p();
   }, []);
 
   useEffect(() => {}, [data]);

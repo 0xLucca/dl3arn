@@ -11,7 +11,7 @@ function useVideo({ videoId }: Params) {
 
   useEffect(() => {
     const p = async () => {
-      if (typeof videoId !== "string") return null;
+      if (!videoId || typeof videoId !== "string") return setVideo(null);
       const res = await getVideo(videoId);
       setVideo(res);
     };

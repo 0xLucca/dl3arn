@@ -22,13 +22,15 @@ const opts: YouTubeProps["opts"] = {
 
 function Course() {
   const router = useRouter();
-  const { id, videoId } = router.query;
+  const { id, videoId } = router.query as { [key: string]: string };
 
   const { current } = useCourse({ id });
   const { video } = useVideo({ videoId });
 
   const handleVideo = (_id?: string) =>
-    _id && router.push(`${id}?videoId=${_id}`, undefined, { shallow: true });
+    router.push(_id ? `${id}?videoId=${_id}` : id, undefined, {
+      shallow: true,
+    });
 
   return (
     <Container>
@@ -36,21 +38,24 @@ function Course() {
         <title>DL3arn | {current?.name}</title>
       </Head>
       <main>
-        <section className="videos">
+        <aside className="videos">
+          <button onClick={() => handleVideo()}>{current?.name}</button>
           <ul>
             {current?.videos?.map(
               (video) =>
                 video && (
                   <Video
-                    onClick={() => handleVideo(video.uid)}
                     key={video.uid}
-                    {...video}
-                    current_video={video.uid === videoId}
+                    free={video.free}
+                    duration={video.duration}
+                    name={video.name}
+                    current_video={!!videoId && video.uid === videoId}
+                    onClick={() => handleVideo(video.uid)}
                   />
                 )
             )}
           </ul>
-        </section>
+        </aside>
 
         <div className="course-content">
           {video ? (

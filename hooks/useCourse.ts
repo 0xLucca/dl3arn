@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import getCourse from "services/firebase/store/getCourse";
 import { GetCourse } from "utils/types/Course";
 
-function useCourse({ id }: { id?: string | string[] }) {
-  const [current, setCurrent] = useState<Partial<GetCourse> | null>(null);
+type Data = Partial<GetCourse>;
+
+function useCourse({ id }: { id?: string }) {
+  const [current, setCurrent] = useState<Data | null>(null);
 
   useEffect(() => {
     const p = async () => {
-      if (!id || typeof id !== "string") return null;
-
-      const res = await getCourse(id);
-      if (!res) return null;
-      setCurrent(res);
+      if (!id) return null;
+      fetch(`/api/courses/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCurrent(data as Data);
+        });
     };
     p();
   }, [id]);
