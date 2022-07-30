@@ -11,7 +11,7 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [chain.mainnet, chain.polygon, chain.rinkeby],
+  [chain.rinkeby, chain.mainnet, chain.polygon],
   [
     alchemyProvider({
       alchemyId: "_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", //Generar API key propio
@@ -26,7 +26,7 @@ const { connectors } = getDefaultWallets({
 });
 
 const wagmiClient = createClient({
-  autoConnect: true,
+  autoConnect: false,
   connectors,
   provider,
   webSocketProvider,

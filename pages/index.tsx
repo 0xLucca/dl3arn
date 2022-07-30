@@ -6,30 +6,45 @@ import styles from "../styles/Home.module.css";
 import { NFTabi } from "../abis/NFTabi";
 import React from "react";
 
+const CONTRACT_ADDRESS = "0x635321aDC5912Ede895F144CC9048baAE24e6E67";
+
 const Home: NextPage = () => {
-  const [unlocked, setUnlocked] = React.useState(false);
+  const [lockedPage, setLockedPage] = React.useState(true);
+  const [readEnable, setReadEnable] = React.useState(false);
 
-  const { address, isConnecting, isDisconnected } = useAccount();
-
-  const { data: hasNft } = useContractRead({
-    addressOrName: "0x635321aDC5912Ede895F144CC9048baAE24e6E67",
+  const contractConfig = {
+    addressOrName: CONTRACT_ADDRESS,
     contractInterface: NFTabi,
+  };
+
+  const { address, isConnected } = useAccount({
+    onDisconnect() {
+      setReadEnable(false);
+      setLockedPage(true);
+    },
+    onConnect() {
+      setReadEnable(true);
+    },
+  });
+
+  const { data: hasNft, error: fetchError } = useContractRead({
+    ...contractConfig,
     functionName: "balanceOf",
-    watch: true,
+    watch: false,
     args: [address, 1],
+    enabled: readEnable,
   });
 
   React.useEffect(() => {
-    if (hasNft) {
-      let result = hasNft.toNumber();
+    if (isConnected) {
+      let result = hasNft?.toNumber();
       if (!!result) {
-        // false if result==0
-        setUnlocked(false);
+        setLockedPage(false);
       } else {
-        setUnlocked(true);
+        setLockedPage(true);
       }
     }
-  }, [hasNft]);
+  }, [address]);
 
   return (
     <div>
@@ -49,7 +64,7 @@ const Home: NextPage = () => {
         </div>
         <div>
           <h1 style={{ margin: "12px 0 24px" }}>
-            Locked Page: {unlocked.toString()}
+            Locked Page: {lockedPage.toString()}
           </h1>
         </div>
       </main>
