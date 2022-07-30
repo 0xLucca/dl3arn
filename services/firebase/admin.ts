@@ -1,9 +1,10 @@
 import * as admin from "firebase-admin";
-import { applicationDefault } from "firebase-admin/app";
+import { ServiceAccount } from "firebase-admin";
+import Credentials from "./firebase_admin.json";
 
 try {
   admin.initializeApp({
-    credential: applicationDefault(),
+    credential: admin.credential.cert(Credentials as ServiceAccount),
   });
 } catch (e) {}
 

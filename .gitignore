@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Firebase Admin
+firebase_admin.json
+
 # dependencies
 /node_modules
 /.pnp
