@@ -5,8 +5,6 @@ import CardPlaceholder from "@/components/Placeholders/Card";
 import PrivateRoute from "@/components/PrivateRoute";
 import useCourses from "@/hooks/useCourses";
 import Head from "next/head";
-import { PrimaryButton } from "components/Buttons";
-import createCourse from "services/firebase/store/createCourse";
 
 const Container = styled.div`
   width: 90%;
@@ -36,13 +34,7 @@ const Container = styled.div`
 function Dashboard() {
   const {
     data: { courses, isLoading },
-    refetch,
   } = useCourses();
-
-  const handleCreation = async () => {
-    await createCourse();
-    refetch();
-  };
 
   return (
     <PrivateRoute verified>
@@ -51,11 +43,10 @@ function Dashboard() {
       </Head>
       <Container>
         <main>
-          <PrimaryButton onClick={handleCreation}>Test firestore</PrimaryButton>
           <section>
             <h2>courses</h2>
             <div className="cards">
-              {Array.from({ length: 19 }).map((_, i) =>
+              {Array.from({ length: 6 }).map((_, i) =>
                 isLoading ? (
                   <CardPlaceholder key={i} />
                 ) : (
@@ -68,7 +59,7 @@ function Dashboard() {
                       score={courses[i].score}
                       instructor={courses[i].instructor}
                       image={courses[i].image}
-                      description={i === 0 ? getDescription() : undefined}
+                      description={i === 0 ? courses[i].description : ""}
                     />
                   )
                 )

@@ -1,25 +1,18 @@
 import Head from "next/head";
 import Router from "next/router";
+import createCourse from "services/firebase/store/createCourse";
 import styled from "styled-components";
+import { exampleCourses } from "utils/types/Course";
 
-import {
-  PrimaryButton,
-  SecondaryButton,
-  SimpleButton,
-} from "../../components/Buttons";
-import Card from "../../components/Dashboard/Card";
-import CardPlaceholder from "../../components/Placeholders/Card";
+import { PrimaryButton } from "../../components/Buttons";
 
 import { NODE_ENV } from "../../constants";
-import useCourses from "../../hooks/useCourses";
-
-const getDescription = () =>
-  `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi sequi, harum dolorem ullam adipisci optio architecto necessitatibus nesciunt ab soluta, quisquam natus cum provident amet officia fuga. Aspernatur, alias quasi?`;
 
 const Container = getStyles();
 function Test() {
-  const { courses, isLoading } = useCourses();
   if (NODE_ENV !== "development") return Router.back();
+
+  const uploadCourses = () => exampleCourses.map(createCourse);
 
   return (
     <Container>
@@ -28,35 +21,10 @@ function Test() {
       </Head>
 
       <main style={{ margin: "5vh 0 0 0" }}>
-        <section className="buttons">
-          <h2>buttons</h2>
+        <section>
+          <h2>Load Mockups</h2>
           <div>
-            <PrimaryButton>Simple</PrimaryButton>
-            <SecondaryButton>Simple</SecondaryButton>
-            <SimpleButton>Simple</SimpleButton>
-          </div>
-        </section>
-
-        <section className="cards">
-          <h2>courses</h2>
-
-          <div>
-            {Array.from({ length: 19 }).map((_, i) =>
-              !isLoading ? (
-                <Card
-                  key={i}
-                  id={courses[i].id}
-                  name={courses[i].name}
-                  time={courses[i].time}
-                  score={courses[i].score}
-                  instructor={courses[i].instructor}
-                  image={courses[i].image}
-                  description={i === 0 ? getDescription() : undefined}
-                />
-              ) : (
-                <CardPlaceholder key={`card-placeholder-${i}`} />
-              )
-            )}
+            <PrimaryButton onClick={uploadCourses}>Curses</PrimaryButton>
           </div>
         </section>
       </main>

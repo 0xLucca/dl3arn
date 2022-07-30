@@ -16,6 +16,7 @@ function useCourses() {
   const fetchCourses = useCallback(async () => {
     setData((old) => ({ ...old, data: { courses: [], isLoading: true } }));
     const courses = await getCourses();
+    console.log(courses);
     setData((old) => ({
       ...old,
       courses,

@@ -5,7 +5,9 @@ import Course from "utils/types/Course";
 import { PrimaryButton } from "../Buttons";
 import { Container } from "./styles";
 
-interface CardProps extends Omit<Course, "videos"> {}
+type Ignore = "videos" | "contract";
+interface CardProps extends Omit<Course, Ignore> {}
+
 function Card({
   uid,
   description,
@@ -35,16 +37,8 @@ function Card({
               <FireIcon size={14} /> {score}
             </p>
           </div>
+          <p className="description">{description}</p>
         </div>
-
-        {description && (
-          <p className="description">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
-            sequi, harum dolorem ullam adipisci optio architecto necessitatibus
-            nesciunt ab soluta, quisquam natus cum provident amet officia fuga.
-            Aspernatur, alias quasi?
-          </p>
-        )}
 
         <PrimaryButton
           onClick={() => Router.push(`/course/${uid}`)}

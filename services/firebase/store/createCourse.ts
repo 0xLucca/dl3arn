@@ -1,21 +1,31 @@
 import { addDoc } from "firebase/firestore";
-import { coursesCollection } from "../store/collections";
-import Course from "utils/types/Course";
+import { coursesCollection, videosCollection } from "../store/collections";
+import { CreateCourse } from "utils/types/Course";
 
-type CreateCourse = Omit<Course, "videos" | "uid">;
+async function createCourse(newCourse: CreateCourse) {
+  const { videos } = newCourse;
 
-async function createCourse() {
-  const course: CreateCourse = {
-    name: "Learn Figma",
-    description: "Lorem ipsum dolor sit amet",
-    total_duration: "6h 50min",
-    score: 5,
-    image: "https://picsum.photos/1920/1080",
+  if (!videos || !videos.length)
+    return await addDoc(coursesCollection, newCourse);
 
-    instructor: { name: "Elmer Hallowell" },
+  const refs = await Promise.all(
+    videos.map(async (video) => {
+      return await addDoc(videosCollection, video);
+    })
+  );
+
+  const parsedCourse = {
+    ...newCourse,
+    videos: refs.map((ref) => ref.id),
   };
-  const new_course = await addDoc(coursesCollection, course);
-  return new_course;
+
+  const res = await addDoc(coursesCollection, parsedCourse);
+
+  console.log("completed");
+  return res;
+
+  // const new_course = await addDoc(coursesCollection, course);
+  // return new_course;
 }
 
 export default createCourse;

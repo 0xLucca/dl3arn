@@ -30,7 +30,8 @@ export const Container = styled.article`
       width: 100%;
 
       .name {
-        text-transform: capitalize;
+        max-width: 10rem;
+        text-overflow: ellipsis;
         font-size: 1.1rem;
         letter-spacing: 0.5px;
       }
@@ -50,6 +51,7 @@ export const Container = styled.article`
           display: flex;
           align-items: center;
           flex-flow: row-reverse;
+          white-space: nowrap;
         }
       }
     }
@@ -84,8 +86,10 @@ export const Container = styled.article`
       .info {
         flex-flow: column;
         align-items: flex-start;
+
         .name {
-          font-size: 2rem;
+          max-width: 17rem;
+          font-size: 1.5rem;
           font-weight: 800;
           letter-spacing: 2px;
         }
@@ -110,7 +114,12 @@ export const Container = styled.article`
         overflow-y: scroll;
         padding: 0 0.5rem 0.5rem 0;
         word-wrap: break-word;
+        margin: 0.75rem 0 0 0;
       }
     }
+  }
+  .name {
+    white-space: nowrap;
+    overflow: hidden;
   }
 `;
