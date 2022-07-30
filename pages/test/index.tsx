@@ -1,21 +1,15 @@
 import Head from "next/head";
 import Router from "next/router";
-import createCourse from "services/firebase/store/createCourse";
-import { exampleCourses, Video } from "utils/types/Course";
+import { Video } from "utils/types/Course";
 import { Container } from "styles/test.styles";
-
-import { PrimaryButton } from "../../components/Buttons";
 
 import { NODE_ENV } from "../../constants";
 import { useEffect, useState } from "react";
-import { auth } from "services/firebase";
-import { auth as adminAuth } from "services/firebase/admin";
 import { GetServerSideProps } from "next";
 import privateRoute from "utils/privateRoute";
 
 function Test() {
   const video = useTest();
-  console.log(video);
 
   if (NODE_ENV !== "development") return Router.back();
 
@@ -38,9 +32,6 @@ function Test() {
         </section>
         <section>
           <h2>Load Mockups</h2>
-          <div>
-            <PrimaryButton onClick={uploadCourses}>Curses</PrimaryButton>
-          </div>
         </section>
       </main>
       <footer></footer>
@@ -79,8 +70,4 @@ function useTest() {
   useEffect(() => {}, [data]);
 
   return data;
-}
-
-function uploadCourses() {
-  return exampleCourses.map(createCourse);
 }

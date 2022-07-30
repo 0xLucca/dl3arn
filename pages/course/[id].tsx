@@ -45,12 +45,12 @@ function Course() {
               (video) =>
                 video && (
                   <Video
-                    key={video.uid}
+                    key={video.id}
                     free={video.free}
                     duration={video.duration}
                     name={video.name}
-                    current_video={!!videoId && video.uid === videoId}
-                    onClick={() => handleVideo(video.uid)}
+                    current_video={!!videoId && video.id === videoId}
+                    onClick={() => handleVideo(video.id)}
                   />
                 )
             )}

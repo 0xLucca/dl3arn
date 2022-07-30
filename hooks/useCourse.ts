@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
-import { GetCourse } from "utils/types/Course";
-
-type Data = Partial<GetCourse>;
+import TypedFetch from "utils/TypedFetch";
+import { APIGetCourseById } from "utils/types/course";
 
 function useCourse({ id }: { id?: string }) {
-  const [current, setCurrent] = useState<Data | null>(null);
+  const [current, setCurrent] = useState<APIGetCourseById | null>(null);
 
   useEffect(() => {
     const p = async () => {
       if (!id) return null;
-      fetch(`/api/courses/${id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setCurrent(data as Data);
-        });
+      const course = await TypedFetch<APIGetCourseById>(`/api/courses/${id}`);
+      setCurrent(course);
     };
     p();
   }, [id]);

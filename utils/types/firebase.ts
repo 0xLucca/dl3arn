@@ -61,3 +61,34 @@ export interface FirebaseContext {
     updateUser: UpdateUser;
   };
 }
+
+/* -------------------- STORE -------------------- */
+
+export interface CourseModel {
+  contract: ContractModel;
+  description: string;
+  image: string;
+  instructor: InstructorModel;
+  id: string;
+  name: string;
+  score: number;
+  total_duration: string;
+  videos: string[];
+}
+
+export interface VideoModel {
+  duration: string;
+  free: boolean;
+  name: string;
+  id: string;
+  videoId: string;
+}
+
+export interface ContractModel {
+  address: string;
+  chainId: number;
+}
+
+export interface InstructorModel {
+  name: string;
+}
