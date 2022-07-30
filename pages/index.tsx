@@ -7,6 +7,7 @@ import { NFTabi } from "../abis/NFTabi";
 import React from "react";
 
 const CONTRACT_ADDRESS = "0x635321aDC5912Ede895F144CC9048baAE24e6E67";
+const CHAIN_ID = 4;
 
 const Home: NextPage = () => {
   const [lockedPage, setLockedPage] = React.useState(true);
@@ -33,6 +34,7 @@ const Home: NextPage = () => {
     watch: false,
     args: [address, 1],
     enabled: readEnable,
+    chainId: CHAIN_ID,
   });
 
   React.useEffect(() => {
