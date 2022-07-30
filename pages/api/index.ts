@@ -1,15 +1,22 @@
-import { collection, getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
-import { db } from "services/firebase";
+import { auth } from "services/firebase/admin";
+import { videosCollection } from "services/firebase/store/collections";
+
+const userHasVideo = (_address: string) => true;
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const data = await getDocs(collection(db, "test-course"));
+  const { id, token } = req.body;
 
-  const {
-    body: { token },
-  } = req;
+  const current_user = await auth.verifyIdToken(token);
 
-  if (!token) return res.status(401).json({});
+  const ref = await getDoc(doc(videosCollection, id));
+  const data = ref.data();
+
+  if (!data || typeof data !== "object") return res.status(401).json(null);
+
+  if (!userHasVideo(data.contract?.address || ""))
+    return res.status(401).json(null);
 
   res.status(200).json({ data });
 }

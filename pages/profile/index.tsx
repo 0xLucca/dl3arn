@@ -8,6 +8,8 @@ import { FormEvent } from "react";
 import { ProfileContainer } from "@/styles/profile.styles";
 import { PrimaryButton } from "components/Buttons";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
+import privateRoute from "utils/privateRoute";
 
 const defaults: Partial<User> = {};
 
@@ -108,4 +110,9 @@ function Profile() {
   );
 }
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const isUnauthenticated = await privateRoute(context);
+  if (isUnauthenticated) return isUnauthenticated;
+  return { props: {} };
+};
 export default Profile;

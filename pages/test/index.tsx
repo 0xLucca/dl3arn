@@ -1,18 +1,23 @@
 import Head from "next/head";
 import Router from "next/router";
 import createCourse from "services/firebase/store/createCourse";
-import styled from "styled-components";
-import { exampleCourses } from "utils/types/Course";
+import { exampleCourses, Video } from "utils/types/Course";
+import { Container } from "styles/test.styles";
 
 import { PrimaryButton } from "../../components/Buttons";
 
 import { NODE_ENV } from "../../constants";
+import { useEffect, useState } from "react";
+import { auth } from "services/firebase";
+import { auth as adminAuth } from "services/firebase/admin";
+import { GetServerSideProps } from "next";
+import privateRoute from "utils/privateRoute";
 
-const Container = getStyles();
 function Test() {
-  if (NODE_ENV !== "development") return Router.back();
+  const video = useTest();
+  console.log(video);
 
-  const uploadCourses = () => exampleCourses.map(createCourse);
+  if (NODE_ENV !== "development") return Router.back();
 
   return (
     <Container>
@@ -21,6 +26,16 @@ function Test() {
       </Head>
 
       <main style={{ margin: "5vh 0 0 0" }}>
+        <section>
+          <h2>Test video authorization</h2>
+          {video ? (
+            <div>
+              <h3>{video.name}</h3>
+            </div>
+          ) : (
+            <div>You don&apos;t have this video</div>
+          )}
+        </section>
         <section>
           <h2>Load Mockups</h2>
           <div>
@@ -33,30 +48,39 @@ function Test() {
   );
 }
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const isUnauthenticated = await privateRoute(context);
+  if (isUnauthenticated) return isUnauthenticated;
+  return { props: {} };
+};
+
 export default Test;
 
-function getStyles() {
-  return styled.div`
-    section {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+function useTest() {
+  const [data, setData] = useState<Video | null>(null);
 
-    .buttons {
-      > div {
-        max-width: 300px;
-        margin: 1rem 0;
-        display: flex;
-        flex-flow: column;
-        gap: 1rem;
-      }
-    }
+  useEffect(() => {
+    const p = async () => {
+      const { data } = await fetch("/api", {
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: "2nkDIwmSXL7HNBvOvCSH",
+          token: (await auth.currentUser?.getIdToken()) || null,
+        }),
+        method: "POST",
+      }).then((res) => res.json());
 
-    .cards {
-      margin: 1rem 0;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem 3rem;
-    }
-  `;
+      if (!data) return setData(data as null);
+      return setData(data as Video);
+    };
+    // p();
+  }, []);
+
+  useEffect(() => {}, [data]);
+
+  return data;
+}
+
+function uploadCourses() {
+  return exampleCourses.map(createCourse);
 }

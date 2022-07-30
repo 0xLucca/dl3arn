@@ -5,14 +5,16 @@ import { Container } from "styles/course.styles";
 import Head from "next/head";
 import useCourse from "hooks/useCourse";
 import useVideo from "hooks/useVideo";
+import { GetServerSideProps } from "next";
+import privateRoute from "utils/privateRoute";
 
 const opts: YouTubeProps["opts"] = {
   height: "575",
   width: "100%",
 
   playerVars: {
-    autoplay: 1,
-    controls: 0,
+    autoplay: 0,
+    controls: 1,
     disablekb: 1,
     fs: 1,
   },
@@ -73,6 +75,12 @@ function Course() {
     </Container>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const isUnauthenticated = await privateRoute(context);
+  if (isUnauthenticated) return isUnauthenticated;
+  return { props: {} };
+};
 
 export default Course;
 

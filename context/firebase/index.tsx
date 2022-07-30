@@ -16,6 +16,7 @@ import {
   updateCredentials,
   updateUser,
 } from "services/firebase/auth";
+import { removeCookies, setCookie } from "cookies-next";
 
 const initial = {
   auth: {
@@ -43,6 +44,11 @@ function Provider({ children }: Props) {
 
   useEffect(() => {
     const unsuscribe = auth.onAuthStateChanged((user: User | null) => {
+      if (user) {
+        user.getIdToken().then((idToken) => {
+          setCookie("token", idToken);
+        });
+      } else removeCookies("token");
       setData({ user, isLoading: false });
     });
     return unsuscribe;

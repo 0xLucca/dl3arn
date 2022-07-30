@@ -5,6 +5,8 @@ import CardPlaceholder from "@/components/Placeholders/Card";
 import PrivateRoute from "@/components/PrivateRoute";
 import useCourses from "@/hooks/useCourses";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
+import privateRoute from "utils/privateRoute";
 
 const Container = styled.div`
   width: 90%;
@@ -72,8 +74,9 @@ function Dashboard() {
   );
 }
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const isUnauthenticated = await privateRoute(context);
+  if (isUnauthenticated) return isUnauthenticated;
+  return { props: {} };
+};
 export default Dashboard;
-
-function getDescription() {
-  return `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi sequi, harum dolorem ullam adipisci optio architecto necessitatibus nesciunt ab soluta, quisquam natus cum provident amet officia fuga. Aspernatur, alias quasi?`;
-}
