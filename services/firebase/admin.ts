@@ -8,5 +8,5 @@ try {
   });
 } catch (e) {}
 
-export const store = admin.firestore();
 export const auth = admin.auth();
+export const db = admin.firestore();

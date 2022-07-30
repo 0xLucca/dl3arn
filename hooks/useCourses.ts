@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import getCourses from "services/firebase/store/getCourses";
-
-import Course from "../utils/types/Course";
+import TypedFetch from "utils/TypedFetch";
+import { CourseModel } from "utils/types/firebase";
 
 interface Data {
   isLoading: boolean;
-  courses: Course[];
+  courses: CourseModel[];
 }
 function useCourses() {
   const [data, setData] = useState<Data>({
@@ -15,8 +14,9 @@ function useCourses() {
 
   const fetchCourses = useCallback(async () => {
     setData((old) => ({ ...old, data: { courses: [], isLoading: true } }));
-    const courses = await getCourses();
-    console.log(courses);
+
+    const courses = await TypedFetch<CourseModel[]>("/api/courses");
+
     setData((old) => ({
       ...old,
       courses,

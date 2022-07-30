@@ -25,7 +25,7 @@ function Course() {
   const { id, videoId } = router.query as { [key: string]: string };
 
   const { current } = useCourse({ id });
-  const { video } = useVideo({ videoId });
+  const { video, error } = useVideo({ videoId });
 
   const handleVideo = (_id?: string) =>
     router.push(_id ? `${id}?videoId=${_id}` : id, undefined, {
@@ -58,12 +58,13 @@ function Course() {
         </aside>
 
         <div className="course-content">
-          {video ? (
+          {error ? (
+            <div>{error.message}</div>
+          ) : video ? (
             <>
               {video.videoId && <YouTube opts={opts} videoId={video.videoId} />}
               <div className="data">
                 <h1>{video.name}</h1>
-                <p>{video.description}</p>
               </div>
             </>
           ) : (

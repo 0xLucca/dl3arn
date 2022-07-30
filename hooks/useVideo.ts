@@ -8,17 +8,26 @@ interface Params {
 
 function useVideo({ videoId }: Params) {
   const [video, setVideo] = useState<APIGetVideoById>(null);
+  const [error, setError] = useState<{ message: string } | null>(null);
 
   useEffect(() => {
     const p = async () => {
       if (!videoId || typeof videoId !== "string") return setVideo(null);
-      const video = await TypedFetch<APIGetVideoById>(`/api/videos/${videoId}`);
-      setVideo(video);
+      try {
+        const video = await TypedFetch<APIGetVideoById>(
+          `/api/videos/${videoId}`
+        );
+        setVideo(video);
+        setError(null);
+      } catch (e: any) {
+        console.log(e);
+        setError({ message: e.message });
+      }
     };
     p();
   }, [videoId]);
 
-  return { video };
+  return { video, error };
 }
 
 export default useVideo;

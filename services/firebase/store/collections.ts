@@ -3,12 +3,12 @@ import {
   CollectionReference,
   DocumentData,
 } from "firebase/firestore";
-import { Course, UID, Video } from "utils/types/Course";
+import { CourseModel, VideoModel } from "utils/types/firebase";
 import { db } from "..";
 
 const collectionFactory = <T = DocumentData>(collectionName: string) => {
   return collection(db, collectionName) as CollectionReference<T>;
 };
 
-export const coursesCollection = collectionFactory<Course>("courses");
-export const videosCollection = collectionFactory<Video | UID>("videos");
+export const coursesCollection = collectionFactory<CourseModel>("courses");
+export const videosCollection = collectionFactory<VideoModel>("videos");

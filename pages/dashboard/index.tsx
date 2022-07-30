@@ -55,7 +55,7 @@ function Dashboard() {
                   courses[i] && (
                     <Card
                       key={i}
-                      uid={courses[i].uid}
+                      uid={courses[i].id}
                       name={courses[i].name}
                       total_duration={courses[i].total_duration}
                       score={courses[i].score}
