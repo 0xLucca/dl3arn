@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import YouTube, { YouTubeProps } from "react-youtube";
-import { ClockIcon } from "utils/icons";
 import { Container } from "styles/course.styles";
 import Head from "next/head";
 import useCourse from "hooks/useCourse";
 import useVideo from "hooks/useVideo";
 import { GetServerSideProps } from "next";
 import privateRoute from "utils/privateRoute";
+import Video from "components/Course/Video";
 
 const opts: YouTubeProps["opts"] = {
   height: "575",
@@ -39,42 +39,41 @@ function Course() {
       </Head>
       <main>
         <aside className="videos">
-          <button onClick={() => handleVideo()}>{current?.name}</button>
+          <button className="" onClick={() => handleVideo()}>
+            {current?.name}
+          </button>
           <ul>
-            {current?.videos?.map(
-              (video) =>
-                video && (
-                  <Video
-                    key={video.id}
-                    free={video.free}
-                    duration={video.duration}
-                    name={video.name}
-                    current_video={!!videoId && video.id === videoId}
-                    onClick={() => handleVideo(video.id)}
-                  />
-                )
-            )}
+            {current?.videos.map((video) => (
+              <Video
+                key={video?.id}
+                video={video}
+                selected={!!videoId && video?.id === videoId}
+                onClick={() => handleVideo(video?.id)}
+              />
+            ))}
           </ul>
         </aside>
 
         <div className="course-content">
-          {error ? (
-            <div>{error.message}</div>
-          ) : video ? (
+          {error && <div>{error.message}</div>}
+
+          {!error && video ? (
             <>
               {video.videoId && <YouTube opts={opts} videoId={video.videoId} />}
               <div className="data">
                 <h1>{video.name}</h1>
               </div>
             </>
-          ) : (
-            <>
+          ) : null}
+
+          {!error && !video && (
+            <div className="course-container">
               <div>
-                <h1>{current?.name}</h1>
+                <h2 className="course-name">{current?.name}</h2>
                 <p className="instructor">by {current?.instructor?.name}</p>
               </div>
               <p className="description">{current?.description}</p>
-            </>
+            </div>
           )}
         </div>
       </main>
@@ -89,30 +88,3 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default Course;
-
-function Video({
-  current_video,
-  free,
-  name,
-  duration,
-  onClick,
-}: {
-  current_video: boolean;
-  free: boolean;
-  name: string;
-  duration: string;
-  onClick(): any;
-}) {
-  const className = `video ${free ? "" : "pay"} ${
-    current_video ? "highlight" : ""
-  }`;
-  return (
-    <button onClick={onClick} className={className}>
-      <p>{name}</p>
-      <span>
-        {duration}
-        <ClockIcon />
-      </span>
-    </button>
-  );
-}

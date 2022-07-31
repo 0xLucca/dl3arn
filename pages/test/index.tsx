@@ -9,8 +9,6 @@ import { GetServerSideProps } from "next";
 import privateRoute from "utils/privateRoute";
 
 function Test() {
-  const video = useTest();
-
   if (NODE_ENV !== "development") return Router.back();
 
   return (
@@ -19,11 +17,7 @@ function Test() {
         <title>DL3arn | Test page</title>
       </Head>
 
-      <main style={{ margin: "5vh 0 0 0" }}>
-        <section>
-          <h2>Load Mockups</h2>
-        </section>
-      </main>
+      <main style={{ margin: "5vh 0 0 0" }}></main>
       <footer></footer>
     </Container>
   );
