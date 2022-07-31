@@ -6,31 +6,38 @@ interface Params {
   videoId: string | string[] | undefined;
 }
 
+interface Data {
+  error: { message: string } | null;
+  isLoading: boolean;
+  video: APIGetVideoById;
+}
+
+const empty: Data = {
+  error: null,
+  isLoading: false,
+  video: null,
+};
+const initial: Data = {
+  error: null,
+  isLoading: true,
+  video: null,
+};
 function useVideo({ videoId }: Params) {
-  const [video, setVideo] = useState<APIGetVideoById>(null);
-  const [error, setError] = useState<{ message: string } | null>(null);
+  const [data, setData] = useState<Data>(initial);
 
   useEffect(() => {
-    const p = async () => {
-      if (!videoId || typeof videoId !== "string") {
-        setError(null);
-        return setVideo(null);
-      }
-      try {
-        const video = await TypedFetch<APIGetVideoById>(
-          `/api/videos/${videoId}`
-        );
-        setVideo(video);
-        setError(null);
-      } catch (e: any) {
-        console.log(e);
-        setError({ message: e.message });
-      }
-    };
-    p();
+    if (!videoId) return setData(empty);
+
+    setData(initial);
+    TypedFetch<APIGetVideoById>(`/api/videos/${videoId}`)
+      .then(({ data: video, error }) => {
+        if (error) throw error;
+        setData({ ...empty, video });
+      })
+      .catch((error) => error && setData({ ...empty, error }));
   }, [videoId]);
 
-  return { video, error };
+  return data;
 }
 
 export default useVideo;

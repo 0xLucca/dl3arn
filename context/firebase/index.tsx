@@ -46,7 +46,7 @@ function Provider({ children }: Props) {
     const unsuscribe = auth.onAuthStateChanged((user: User | null) => {
       if (user) {
         user.getIdToken().then((idToken) => {
-          setCookie("token", idToken);
+          setCookie("token", idToken, { sameSite: true });
         });
       } else removeCookies("token");
       setData({ user, isLoading: false });

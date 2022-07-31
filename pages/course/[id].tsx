@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import YouTube, { YouTubeProps } from "react-youtube";
 import { Container } from "styles/course.styles";
 import Head from "next/head";
 import useCourse from "hooks/useCourse";
@@ -7,25 +6,14 @@ import useVideo from "hooks/useVideo";
 import { GetServerSideProps } from "next";
 import privateRoute from "utils/privateRoute";
 import Video from "components/Course/Video";
-
-const opts: YouTubeProps["opts"] = {
-  height: "575",
-  width: "100%",
-
-  playerVars: {
-    autoplay: 0,
-    controls: 1,
-    disablekb: 1,
-    fs: 1,
-  },
-};
+import Loading from "components/Loading";
 
 function Course() {
   const router = useRouter();
   const { id, videoId } = router.query as { [key: string]: string };
 
   const { current } = useCourse({ id });
-  const { video, error } = useVideo({ videoId });
+  const { video, error, isLoading } = useVideo({ videoId });
 
   const handleVideo = (_id?: string) =>
     router.push(_id ? `${id}?videoId=${_id}` : id, undefined, {
@@ -55,26 +43,35 @@ function Course() {
         </aside>
 
         <div className="course-content">
-          {error && <div>{error.message}</div>}
+          <Loading isLoading={isLoading} element={<LoadingVideo />}>
+            {error && <div>{error.message}</div>}
 
-          {!error && video ? (
-            <>
-              {video.videoId && <YouTube opts={opts} videoId={video.videoId} />}
-              <div className="data">
-                <h1>{video.name}</h1>
-              </div>
-            </>
-          ) : null}
+            {!error && video ? (
+              <>
+                <iframe
+                  id="ytplayer"
+                  width="100%"
+                  height="575"
+                  src={`https://www.youtube.com/embed/${video.videoId}?autoplay=0&origin=http://example.com`}
+                  frameBorder="0"
+                />
 
-          {!error && !video && (
-            <div className="course-container">
-              <div>
-                <h2 className="course-name">{current?.name}</h2>
-                <p className="instructor">by {current?.instructor?.name}</p>
+                <div className="data">
+                  <h1>{video.name}</h1>
+                </div>
+              </>
+            ) : null}
+
+            {!error && !video && (
+              <div className="course-container">
+                <div>
+                  <h2 className="course-name">{current?.name}</h2>
+                  <p className="instructor">by {current?.instructor?.name}</p>
+                </div>
+                <p className="description">{current?.description}</p>
               </div>
-              <p className="description">{current?.description}</p>
-            </div>
-          )}
+            )}
+          </Loading>
         </div>
       </main>
     </Container>
@@ -88,3 +85,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default Course;
+
+function LoadingVideo() {
+  return (
+    <div className="loading">
+      <div>Loading your video</div>
+    </div>
+  );
+}

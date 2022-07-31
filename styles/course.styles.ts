@@ -47,4 +47,12 @@ export const Container = styled.div`
       font-size: 1.5rem;
     }
   }
+
+  .loading {
+    text-align: center;
+    padding: 1rem;
+    font-size: 2rem;
+    font-weight: 600;
+    height: 100%;
+  }
 `;
