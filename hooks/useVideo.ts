@@ -12,7 +12,10 @@ function useVideo({ videoId }: Params) {
 
   useEffect(() => {
     const p = async () => {
-      if (!videoId || typeof videoId !== "string") return setVideo(null);
+      if (!videoId || typeof videoId !== "string") {
+        setError(null);
+        return setVideo(null);
+      }
       try {
         const video = await TypedFetch<APIGetVideoById>(
           `/api/videos/${videoId}`
