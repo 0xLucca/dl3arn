@@ -4,7 +4,7 @@ import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { GlobalStyle } from "../utils/styled";
+import { GlobalStyle } from "../styles/global";
 import Provider from "context/firebase";
 import Navbar from "components/Navbar";
 

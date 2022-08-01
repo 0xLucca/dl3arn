@@ -22,4 +22,34 @@ export const Container = styled.div`
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem 3rem;
   }
+
+  main {
+    width: 100%;
+  }
+
+  .btn {
+    display: block;
+    margin: 0 auto;
+    background-color: transparent;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .primary {
+    background-size: 500%;
+    background-position: 0 50%;
+
+    animation: bg 5s linear infinite;
+    color: #fff;
+
+    @keyframes bg {
+      from {
+        background-position: 0 50%;
+      }
+      to {
+        background-position: 100em 50%;
+      }
+    }
+  }
 `;

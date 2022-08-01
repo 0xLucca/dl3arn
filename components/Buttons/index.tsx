@@ -2,11 +2,11 @@ import styled from "styled-components";
 import Button from "./Button";
 
 export const PrimaryButton = styled(Button)`
-  background-color: #1e1e20;
+  background-color: var(--primary);
   color: #fff;
 
   :hover {
-    background-color: #333355;
+    background-color: var(--dark-primary);
   }
 `;
 

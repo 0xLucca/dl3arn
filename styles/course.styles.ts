@@ -2,57 +2,57 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   main {
-    max-width: 1200px;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: minmax(15rem, 20rem) 1fr;
+    margin: 0 auto;
+    max-width: 1200px;
     min-height: 100vh;
 
     .videos {
-      list-style: none;
       background-color: #efefef;
 
       > button {
-        width: 100%;
+        background-color: #fff;
+        border: none;
         font-size: 1.25rem;
         font-weight: 800;
-        text-align: left;
-        border: none;
         padding: 1rem 1rem;
-        background-color: #fff;
+        text-align: left;
+        width: 100%;
       }
     }
 
     .course-content {
       .data {
-        padding: 1rem 1rem;
         border-bottom: 1px solid #00000020;
+        padding: 1rem 1rem;
       }
       .instructor {
         font-size: 0.85rem;
         opacity: 0.5;
       }
       .description {
-        padding: 1rem 0 0 0;
-        line-height: 1.75rem;
-        letter-spacing: 0.25px;
         font-size: 1rem;
+        letter-spacing: 0.25px;
+        line-height: 1.75rem;
+        padding: 1rem 0 0 0;
       }
     }
   }
 
   .course-container {
     padding: 0 2rem;
+
     .course-name {
       font-size: 1.5rem;
     }
   }
 
   .loading {
-    text-align: center;
-    padding: 1rem;
     font-size: 2rem;
     font-weight: 600;
     height: 100%;
+    padding: 1rem;
+    text-align: center;
   }
 `;

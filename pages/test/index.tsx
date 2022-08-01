@@ -17,7 +17,10 @@ function Test() {
         <title>DL3arn | Test page</title>
       </Head>
 
-      <main style={{ margin: "5vh 0 0 0" }}></main>
+      <main style={{ margin: "5vh 0 0 0" }}>
+        <button className="btn primary">hola</button>
+      </main>
+
       <footer></footer>
     </Container>
   );

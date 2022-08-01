@@ -7,6 +7,7 @@ import { Override } from "./utility";
  *
  */
 export enum API_ERRORS {
+  COURSE_NOT_FOUND = "COURSE_NOT_FOUND",
   VIDEO_NOT_FOUND = "VIDEO_NOT_FOUND",
   BUY_NFT = "BUY_NFT",
 }

@@ -1,17 +1,23 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "services/firebase/admin";
+import { APIHandler, API_ERRORS } from "utils/types/api";
 import { APIGetCourseById } from "utils/types/course";
 import { CourseModel, VideoModel } from "utils/types/firebase";
 import { VideoSafeProps } from "utils/types/video";
 
-type Handler = (
-  req: NextApiRequest,
-  res: NextApiResponse<APIGetCourseById | null>
-) => Promise<any>;
+interface Request {
+  query: {
+    id: string;
+  };
+}
 
-const handler: Handler = async (req, res) => {
+const handler: APIHandler<Request, APIGetCourseById> = async (req, res) => {
   const { id } = req.query;
-  if (typeof id !== "string") return res.status(404).json(null);
+  if (!id)
+    return res.status(404).json({
+      data: null,
+      success: false,
+      error: { message: "Course not found", code: API_ERRORS.COURSE_NOT_FOUND },
+    });
 
   const ref = await db.collection("courses").doc(id).get();
   const course = { id: ref.id, ...ref.data() } as CourseModel;
@@ -21,7 +27,7 @@ const handler: Handler = async (req, res) => {
     videos: await getVideos(course.videos),
   };
 
-  res.status(200).json(parsed_course);
+  res.status(200).json({ data: parsed_course, error: null, success: true });
 };
 
 export default handler;

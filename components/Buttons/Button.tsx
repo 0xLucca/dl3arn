@@ -8,9 +8,6 @@ const BaseButton = styled.button`
   padding: 0.75rem 1.25rem;
 
   border: none;
-  border-radius: 0.25rem;
-  background-color: transparent;
-  box-shadow: 0 0.25rem 0.5rem #0000;
 
   letter-spacing: 0.5px;
   font-weight: 600;
