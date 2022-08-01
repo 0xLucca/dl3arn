@@ -14,8 +14,8 @@ function Course() {
 
   const { current, locked } = useCourse({ id });
 
-  const isFree = current?.videos.filter((video) => video.id === videoId)[0]
-    .free;
+  const isFree = current?.videos.filter((video) => video.id === videoId)![0]
+    ?.free;
 
   const { video, error, isLoading } = useVideo({
     video: {
