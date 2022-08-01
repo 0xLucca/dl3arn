@@ -40,7 +40,7 @@ function useVideo({ videoId, contract }: Params) {
         setData({ ...empty, video });
       })
       .catch((error) => error && setData({ ...empty, error }));
-  }, [videoId]);
+  }, [videoId, contract]);
 
   return data;
 }
