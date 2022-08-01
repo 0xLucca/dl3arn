@@ -1,10 +1,7 @@
-import axios from "axios";
-import { YOUTUBE_API_KEY } from "@/constants";
 import { db } from "services/firebase/admin";
 import { APIHandler, API_ERRORS } from "utils/types/api";
 import { APIGetCourseById } from "utils/types/course";
 import { CourseModel, VideoModel } from "utils/types/firebase";
-import { VideoSafeProps } from "utils/types/video";
 import getVideosDuration from "utils/youtube";
 
 interface Request {
@@ -60,21 +57,3 @@ const handler: APIHandler<Request, APIGetCourseById> = async (req, res) => {
 };
 
 export default handler;
-
-async function getVideos(videos: string[]) {
-  return await Promise.all(
-    videos.map(async (video) => {
-      const video_ref = await db.collection("videos").doc(video).get();
-      const video_data = video_ref.data() as VideoModel;
-
-      const new_video: VideoSafeProps = {
-        id: video_ref.id,
-        name: video_data.name,
-        duration: video_data.duration,
-        free: video_data.free,
-      };
-
-      return new_video;
-    })
-  );
-}

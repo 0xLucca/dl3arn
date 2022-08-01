@@ -29,15 +29,7 @@ const handler: Handler = async (req, res) => {
   const snapshot = await ref.get();
   const video = { id: ref.id, ...snapshot.data() };
 
-  if (video.free) return res.json({ data: video, error: null, success: true });
-  return res.status(401).json({
-    error: {
-      message: "You don't have this NFT",
-      code: API_ERRORS.BUY_NFT,
-    },
-    data: null,
-    success: false,
-  });
+  return res.json({ data: video, error: null, success: true });
 };
 
 export default handler;

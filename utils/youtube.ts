@@ -1,24 +1,6 @@
 import { YOUTUBE_API_KEY } from "@/constants";
 import axios from "axios";
-
-const parseISO8601 = (iso: string) => {
-  const r =
-    /(-)?P(?:([.,\d]+)Y)?(?:([.,\d]+)M)?(?:([.,\d]+)W)?(?:([.,\d]+)D)?T(?:([.,\d]+)H)?(?:([.,\d]+)M)?(?:([.,\d]+)S)?/;
-
-  const matches = iso.match(r);
-
-  if (!matches) return null;
-  return {
-    sign: matches[1] === undefined ? "+" : "-",
-    years: matches[2] === undefined ? 0 : matches[2],
-    months: matches[3] === undefined ? 0 : matches[3],
-    weeks: matches[4] === undefined ? 0 : matches[4],
-    days: matches[5] === undefined ? 0 : matches[5],
-    hours: matches[6] === undefined ? 0 : matches[6],
-    minutes: matches[7] === undefined ? 0 : matches[7],
-    seconds: matches[8] === undefined ? 0 : matches[8],
-  };
-};
+import ISO8601 from "./ISO8601";
 
 const baseUrl = `https://youtube.googleapis.com/youtube/v3/videos?key=${YOUTUBE_API_KEY}&part=contentDetails`;
 
@@ -43,43 +25,12 @@ async function getVideosDuration(
 
   const durations: { [key: string]: string } = {};
 
+  const iso = new ISO8601();
   data.items.forEach(({ id, contentDetails: { duration } }) => {
-    const parsed_duration = parseISO8601(duration);
-    if (!parsed_duration) return "";
-    const { hours, minutes, seconds } = parsed_duration;
-
-    durations[id] = `${hours ? hours + "h " : ""}${
-      minutes ? minutes + "m " : ""
-    }${seconds ? seconds + "s" : ""}`;
+    durations[id] = iso.toString(duration);
   });
 
   return durations;
 }
 
 export default getVideosDuration;
-
-/*
-        if (YOUTUBE_API_KEY) {
-          const { data: youtube_data } = await axios.get(
-            `${baseUrl}part=contentDetails&id=${data.videoId}&key=${YOUTUBE_API_KEY}`,
-            {
-              headers: {
-                Authorization: YOUTUBE_API_KEY,
-                Accept: "application/json",
-              },
-            }
-          );
-          duration = youtube_data.items[0].contentDetails.duration as string;
-
-          const matches = duration.match(iso8601Regex);
-
-          if (matches) {
-            const obj = {
-              minutes: matches[7] === undefined ? 0 : matches[7],
-              seconds: matches[8] === undefined ? 0 : matches[8],
-            };
-
-            duration = `${obj.minutes}min ${obj.seconds}s`;
-          }
-        }
-        */

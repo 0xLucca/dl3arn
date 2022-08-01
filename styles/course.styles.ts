@@ -9,16 +9,19 @@ export const Container = styled.div`
     min-height: 100vh;
 
     .videos {
-      background-color: #efefef;
-
-      > button {
-        background-color: #fff;
+      .course {
+        position: relative;
+        background-color: transparent;
         border: none;
         font-size: 1.25rem;
         font-weight: 800;
-        padding: 1rem 1rem;
+        padding: 1.5rem 1rem;
         text-align: left;
         width: 100%;
+      }
+
+      .course.active {
+        color: var(--primary);
       }
     }
 

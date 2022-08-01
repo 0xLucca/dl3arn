@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import TypedFetch from "utils/TypedFetch";
+import { ContractModel } from "utils/types/firebase";
 import { APIGetVideoById } from "utils/types/video";
 
 interface Params {
-  videoId: string | string[] | undefined;
+  videoId: string;
+  contract: ContractModel | null;
 }
 
 interface Data {
@@ -22,11 +24,14 @@ const initial: Data = {
   isLoading: true,
   video: null,
 };
-function useVideo({ videoId }: Params) {
+function useVideo({ videoId, contract }: Params) {
   const [data, setData] = useState<Data>(initial);
 
   useEffect(() => {
     if (!videoId) return setData(empty);
+
+    // si el usuario no tienen el NFT no hace nada
+    if (contract && !true) return setData(empty);
 
     setData(initial);
     TypedFetch<APIGetVideoById>(`/api/videos/${videoId}`)

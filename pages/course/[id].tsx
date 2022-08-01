@@ -13,7 +13,10 @@ function Course() {
   const { id, videoId } = router.query as { [key: string]: string };
 
   const { current } = useCourse({ id });
-  const { video, error, isLoading } = useVideo({ videoId });
+  const { video, error, isLoading } = useVideo({
+    videoId,
+    contract: current?.contract || null,
+  });
 
   const handleVideo = (_id?: string) =>
     router.push(_id ? `${id}?videoId=${_id}` : id, undefined, {
@@ -27,7 +30,10 @@ function Course() {
       </Head>
       <main>
         <aside className="videos">
-          <button className="" onClick={() => handleVideo()}>
+          <button
+            className={`course ${!videoId ? "active" : ""}`}
+            onClick={() => handleVideo()}
+          >
             {current?.name}
           </button>
           <ul>
