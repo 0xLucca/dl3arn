@@ -17,13 +17,11 @@ const initial = {
   email: { value: "" },
   password: { value: "" },
   current_password: { value: "" },
-  photoURL: { value: "" },
 };
 function Profile() {
   const {
     data: { user },
     logout,
-    updateUser,
     updateCredentials,
   } = useAuth();
   const { email, photoURL, displayName } = user ? user : defaults;
@@ -39,14 +37,6 @@ function Profile() {
       password: inputs.password.value,
     };
     updateCredentials(current_password.value, values);
-  };
-
-  const updateData = (e: FormEvent) => {
-    e.preventDefault();
-    const values = {
-      photoURL: inputs.photoURL.value,
-    };
-    updateUser(values);
   };
 
   return (
@@ -87,18 +77,6 @@ function Profile() {
               name="current_password"
               value={inputs.current_password.value}
               placeholder="current password"
-            />
-          </div>
-          <PrimaryButton className="btn">update</PrimaryButton>
-        </form>
-
-        <form className="credentials" onSubmit={updateData}>
-          <div className="inputs">
-            <Input
-              onChange={onChange}
-              name="photoURL"
-              value={inputs.photoURL.value}
-              placeholder="Photo"
             />
           </div>
           <PrimaryButton className="btn">update</PrimaryButton>

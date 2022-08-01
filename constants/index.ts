@@ -1,6 +1,13 @@
 export const NODE_ENV = process.env.NODE_ENV;
 
+/* -------------------- YOUTUBE  -------------------- */
+
+export const YOUTUBE_CLIENT_ID = process.env.YOUTUBE_CLIENT_ID;
+export const YOUTUBE_CLIENT_SECRET = process.env.YOUTUBE_CLIENT_SECRET;
+export const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
+
 /* -------------------- FIREBASE -------------------- */
+
 export const FIREBASE_API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
 export const FIREBASE_APP_ID = process.env.NEXT_PUBLIC_API_KEY;
 export const FIREBASE_AUTH_DOMAIN = process.env.NEXT_PUBLIC_API_KEY;
@@ -12,5 +19,6 @@ export const FIREBASE_MESSAGING_SENDER_ID = process.env.NEXT_PUBLIC_API_KEY;
 export const FIREBASE_DATABASE_URL = process.env.NEXT_PUBLIC_API_KEY;
 
 /* -------------------- TESTING -------------------- */
+
 export const AUTH_EMAIL = process.env.NEXT_PUBLIC_AUTH_EMAIL;
 export const AUTH_PASSWORD = process.env.NEXT_PUBLIC_AUTH_PASSWORD;

@@ -5,7 +5,7 @@ import { VideoSafeProps } from "./video";
 export type APIGetCourseById = Override<
   CourseModel,
   {
-    videos: (VideoSafeProps | null)[];
+    videos: VideoSafeProps[];
   }
 > | null;
 export type APIGetCourses = CourseModel;
