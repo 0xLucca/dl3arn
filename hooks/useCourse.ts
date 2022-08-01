@@ -25,16 +25,13 @@ function useCourse({ id }: { id?: string }) {
         });
         setCurrent(data);
         setContract(data.contract);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     };
     p();
   }, [id]);
 
   const { address, isConnected } = useAccount({
     onDisconnect() {
-      console.log("Disconnected");
       setReadEnable(false);
       setLocked(true);
     },
@@ -63,7 +60,6 @@ function useCourse({ id }: { id?: string }) {
       }
     }
   }, [address]);
-  console.log(locked);
   return { current, locked };
 }
 

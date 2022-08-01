@@ -13,8 +13,15 @@ function Course() {
   const { id, videoId } = router.query as { [key: string]: string };
 
   const { current, locked } = useCourse({ id });
+
+  const isFree = current?.videos.filter((video) => video.id === videoId)[0]
+    .free;
+
   const { video, error, isLoading } = useVideo({
-    videoId,
+    video: {
+      id: videoId,
+      free: !!isFree,
+    },
     locked: locked,
   });
 
