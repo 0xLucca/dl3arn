@@ -7,6 +7,7 @@ interface Props {
   video: VideoSafeProps | null;
   onClick(): any;
   selected: boolean;
+  hasNFT: boolean;
 }
 
 interface StyleProps {
@@ -91,11 +92,10 @@ const Container = styled.button<StyleProps>`
     `}
 `;
 
-function Video({ selected, video, onClick }: Props) {
-  const userHasNFT = false;
+function Video({ hasNFT, selected, video, onClick }: Props) {
   if (!video) return null;
 
-  const blocked = !video.free && !userHasNFT;
+  const blocked = !video.free && hasNFT;
   return (
     <Container selected={selected} blocked={blocked} onClick={onClick}>
       <div>

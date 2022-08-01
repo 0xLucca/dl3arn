@@ -1,3 +1,4 @@
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { SecondaryButton } from "components/Buttons";
 import { useAuth } from "context/firebase";
 import Link from "next/link";
@@ -33,6 +34,10 @@ function Navbar() {
             <>
               <li>
                 <NavLink href="/dashboard">Dashboard</NavLink>
+              </li>
+
+              <li>
+                <ConnectButton />
               </li>
 
               <li>

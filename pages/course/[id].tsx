@@ -12,10 +12,10 @@ function Course() {
   const router = useRouter();
   const { id, videoId } = router.query as { [key: string]: string };
 
-  const { current } = useCourse({ id });
+  const { current, locked } = useCourse({ id });
   const { video, error, isLoading } = useVideo({
     videoId,
-    contract: current?.contract || null,
+    locked: locked,
   });
 
   const handleVideo = (_id?: string) =>
@@ -39,6 +39,7 @@ function Course() {
           <ul>
             {current?.videos.map((video) => (
               <Video
+                hasNFT={locked}
                 key={video?.id}
                 video={video}
                 selected={!!videoId && video?.id === videoId}

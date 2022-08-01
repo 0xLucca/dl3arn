@@ -5,7 +5,7 @@ import { APIGetVideoById } from "utils/types/video";
 
 interface Params {
   videoId: string;
-  contract: ContractModel | null;
+  locked: boolean;
 }
 
 interface Data {
@@ -24,14 +24,14 @@ const initial: Data = {
   isLoading: true,
   video: null,
 };
-function useVideo({ videoId, contract }: Params) {
+function useVideo({ videoId, locked }: Params) {
   const [data, setData] = useState<Data>(initial);
 
   useEffect(() => {
     if (!videoId) return setData(empty);
 
     // si el usuario no tienen el NFT no hace nada
-    if (contract && !true) return setData(empty);
+    if (locked) return setData(empty);
 
     setData(initial);
     TypedFetch<APIGetVideoById>(`/api/videos/${videoId}`)
@@ -40,7 +40,7 @@ function useVideo({ videoId, contract }: Params) {
         setData({ ...empty, video });
       })
       .catch((error) => error && setData({ ...empty, error }));
-  }, [videoId, contract]);
+  }, [videoId, locked]);
 
   return data;
 }

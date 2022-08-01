@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import TypedFetch from "utils/TypedFetch";
 import { APIGetCourseById } from "utils/types/course";
+import { ContractModel } from "utils/types/firebase";
+import { useAccount, useContractRead } from "wagmi";
+import { NFTabi } from "abis/NFTabi";
 
 function useCourse({ id }: { id?: string }) {
   const [current, setCurrent] = useState<APIGetCourseById | null>(null);
+  const [contract, setContract] = useState<ContractModel | null>(null);
+  const [locked, setLocked] = useState(true);
+  const [readEnable, setReadEnable] = useState(false);
 
   useEffect(() => {
     const p = async () => {
@@ -18,6 +24,7 @@ function useCourse({ id }: { id?: string }) {
           return Number(b.free) - Number(a.free);
         });
         setCurrent(data);
+        setContract(data.contract);
       } catch (e) {
         console.log(e);
       }
@@ -25,7 +32,39 @@ function useCourse({ id }: { id?: string }) {
     p();
   }, [id]);
 
-  return { current };
+  const { address, isConnected } = useAccount({
+    onDisconnect() {
+      console.log("Disconnected");
+      setReadEnable(false);
+      setLocked(true);
+    },
+    onConnect() {
+      setReadEnable(true);
+    },
+  });
+
+  const { data: hasNft, error: fetchError } = useContractRead({
+    addressOrName: contract?.address || "",
+    contractInterface: NFTabi,
+    functionName: "balanceOf",
+    watch: false,
+    args: [address, 1],
+    enabled: readEnable,
+    chainId: contract?.chainId,
+  });
+
+  useEffect(() => {
+    if (isConnected) {
+      let result = hasNft?.toNumber();
+      if (!!result) {
+        setLocked(false);
+      } else {
+        setLocked(true);
+      }
+    }
+  }, [address]);
+  console.log(locked);
+  return { current, locked };
 }
 
 export default useCourse;
