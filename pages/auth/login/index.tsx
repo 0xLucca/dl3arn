@@ -60,7 +60,8 @@ function Login() {
               ))}
             </div>
             <PrimaryButton>Next</PrimaryButton>
-            <Link href="/auth/reset">
+
+            <Link href="/auth/change/password">
               <a className="link">Forgot password?</a>
             </Link>
           </form>
