@@ -50,7 +50,7 @@ function Course() {
               .filter((video) => video.name)
               .map((video) => (
                 <Video
-                  hasNFT={locked}
+                  hasNFT={!locked}
                   key={video?.id}
                   video={video}
                   selected={!!videoId && video?.id === videoId}
@@ -91,9 +91,10 @@ function Course() {
             )}
           </Loading>
         </div>
-
         <div>
-          {current && <RamppButton address={current.contract.address} />}
+          {current && locked && (
+            <RamppButton address={current.contract.address} />
+          )}
         </div>
       </main>
     </Container>

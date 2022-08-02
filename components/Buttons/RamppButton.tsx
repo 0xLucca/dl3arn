@@ -4,6 +4,7 @@ interface Props {
   address: string;
 }
 function RamppButton({ address }: Props) {
+  if (!address) return null;
   return (
     <>
       <div
