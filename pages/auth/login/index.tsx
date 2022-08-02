@@ -11,6 +11,7 @@ import { FormEvent, useEffect } from "react";
 import Head from "next/head";
 import { useAuth } from "context/firebase";
 import Router from "next/router";
+import GoogleButton from "components/Buttons/GoogleButton";
 
 function Login() {
   const { inputs, onChange } = useForm(loginInputs);
@@ -32,10 +33,6 @@ function Login() {
     login!(values, "email");
   };
 
-  const loginWithGoogle = () => {
-    login!({}, "google");
-  };
-
   return (
     <div>
       <Head>
@@ -46,32 +43,37 @@ function Login() {
       <Main>
         <div>
           <h1>Sign in</h1>
-          <button onClick={loginWithGoogle}>Google</button>
-          <form onSubmit={onSubmit} className="form">
-            <div className="inputs">
-              {Object.entries(inputs).map(([name, data]) => (
-                <Input
-                  key={name}
-                  name={name}
-                  value={data.value}
-                  onChange={onChange}
-                  {...data.inputProps}
-                />
-              ))}
-            </div>
-            <PrimaryButton>Next</PrimaryButton>
 
-            <Link href="/auth/change/password">
-              <a className="link">Forgot password?</a>
-            </Link>
-          </form>
+          <div className="container">
+            <GoogleButton />
+            <p className="separator">
+              <span>Or</span>
+            </p>
+            <form onSubmit={onSubmit} className="form">
+              <div className="inputs">
+                {Object.entries(inputs).map(([name, data]) => (
+                  <Input
+                    key={name}
+                    name={name}
+                    value={data.value}
+                    onChange={onChange}
+                    {...data.inputProps}
+                  />
+                ))}
+              </div>
+              <PrimaryButton>Next</PrimaryButton>
 
-          <p className="signup">
-            Don&apos;t have an account?{" "}
-            <Link href="/auth/signup">
-              <a className="link">Sign up</a>
-            </Link>
-          </p>
+              <Link href="/auth/change/password">
+                <a className="link">Forgot password?</a>
+              </Link>
+            </form>
+            <p className="signup">
+              Don&apos;t have an account?{" "}
+              <Link href="/auth/signup">
+                <a className="link">Sign up</a>
+              </Link>
+            </p>
+          </div>
         </div>
       </Main>
     </div>

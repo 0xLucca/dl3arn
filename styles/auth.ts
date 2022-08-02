@@ -37,4 +37,35 @@ export const Main = styled.main`
       }
     }
   }
+
+  .container {
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+    margin: 1rem 0;
+
+    .separator {
+      align-items: center;
+      color: #0005;
+      display: flex;
+      font-size: 0.8rem;
+      font-weight: 300;
+      text-align: center;
+      width: 100%;
+
+      span {
+        padding: 0 1rem;
+      }
+
+      ::before,
+      ::after {
+        background-color: #0003;
+        content: "";
+        display: block;
+        height: 1px;
+        position: relative;
+        width: 100%;
+      }
+    }
+  }
 `;

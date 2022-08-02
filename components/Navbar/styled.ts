@@ -1,22 +1,13 @@
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  position: sticky;
+  position: relative;
   top: 0;
   left: 0;
   z-index: 9999;
   width: 100%;
   background-color: #fff;
-  height: 4.5rem;
-
-  .verify {
-    display: grid;
-    place-items: center;
-    height: 1.75rem;
-    background-color: #000;
-    color: #fff;
-    font-size: 0.75rem;
-  }
+  height: var(--nav-size);
 
   .wrapper,
   .menu,
@@ -52,4 +43,23 @@ export const Nav = styled.nav`
     padding: 0.75rem 1rem;
     font-size: 0.85rem;
   }
+`;
+
+export const Verify = styled.button`
+  position: absolute;
+  bottom: 7vh;
+  left: 50%;
+
+  transform: translate(-50%, 0);
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background-color: var(--dark);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
 `;

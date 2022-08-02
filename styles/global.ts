@@ -25,6 +25,8 @@ export const GlobalStyle = createGlobalStyle`
   --dark-primary: var(--persian-indigo);
   --dark: #1e1e20;
   --light: #fafaff;
+
+  --nav-size: 56px;
 }
 
 html,
@@ -32,6 +34,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   color: #1e1e20;
+  font-size: 16px;
 }
 
 a {
@@ -41,5 +44,6 @@ a {
 
 a, button {
   cursor: pointer;
+  border: none;
 }
 `;
