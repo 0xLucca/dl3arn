@@ -9,6 +9,7 @@ import Video from "components/Course/Video";
 import Loading from "components/Loading";
 import RamppButton from "components/Buttons/RamppButton";
 import Placeholder from "components/Placeholders";
+import Link from "next/link";
 
 function Course() {
   const router = useRouter();
@@ -61,7 +62,7 @@ function Course() {
         </aside>
 
         <div className="course-content">
-          <Loading isLoading={false} element={<LoadingVideo />}>
+          <Loading isLoading={isLoading} element={<LoadingVideo />}>
             {video ? (
               <>
                 <div className="frame-container">
@@ -75,7 +76,7 @@ function Course() {
                 </div>
 
                 <div className="data">
-                  <h1>{video.name}</h1>
+                  <h2>{video.name}</h2>
                 </div>
               </>
             ) : null}
@@ -112,7 +113,8 @@ export default Course;
 function LoadingVideo() {
   return (
     <div className="loading">
-      <Placeholder width="100%" height="500px" />
+      <Placeholder width="100%" height="75vh" />
+      <Placeholder width="75%" height="2.5rem" />
     </div>
   );
 }

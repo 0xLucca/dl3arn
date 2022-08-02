@@ -10,7 +10,6 @@ export const Container = styled.button<StyleProps>`
   border-radius: 0;
   border: none;
   position: relative;
-  transform: scale(100%) translate(0, 0);
   transition: transform 0.25s;
   width: 100%;
 
@@ -63,8 +62,6 @@ export const Container = styled.button<StyleProps>`
   ${({ selected }) =>
     selected &&
     css`
-      transform: scale(102%) translate(1%, 0);
-
       ::before {
         background-color: var(--primary);
         color: var(--primary-contrast);

@@ -4,7 +4,7 @@ export const Main = styled.main`
   display: grid;
   place-items: center;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - var(--nav-size));
   margin: 0 auto;
 
   .link {

@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.article`
+export const Container = styled.a`
   display: flex;
   flex-flow: column;
   gap: 1rem;
+  text-align: left;
 
   padding: 1rem;
   background-color: #0000000a;
