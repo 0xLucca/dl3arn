@@ -7,6 +7,8 @@ import { GetServerSideProps } from "next";
 import privateRoute from "utils/privateRoute";
 import Video from "components/Course/Video";
 import Loading from "components/Loading";
+import RamppButton from "components/Buttons/RamppButton";
+import Placeholder from "components/Placeholders";
 
 function Course() {
   const router = useRouter();
@@ -44,31 +46,33 @@ function Course() {
             {current?.name}
           </button>
           <ul>
-            {current?.videos.map((video) => (
-              <Video
-                hasNFT={locked}
-                key={video?.id}
-                video={video}
-                selected={!!videoId && video?.id === videoId}
-                onClick={() => handleVideo(video?.id)}
-              />
-            ))}
+            {current?.videos
+              .filter((video) => video.name)
+              .map((video) => (
+                <Video
+                  hasNFT={locked}
+                  key={video?.id}
+                  video={video}
+                  selected={!!videoId && video?.id === videoId}
+                  onClick={() => handleVideo(video?.id)}
+                />
+              ))}
           </ul>
         </aside>
 
         <div className="course-content">
-          <Loading isLoading={isLoading} element={<LoadingVideo />}>
-            {error && <div>{error.message}</div>}
-
-            {!error && video ? (
+          <Loading isLoading={false} element={<LoadingVideo />}>
+            {video ? (
               <>
-                <iframe
-                  id="ytplayer"
-                  width="100%"
-                  height="575"
-                  src={`https://www.youtube.com/embed/${video.videoId}?autoplay=0&origin=http://example.com`}
-                  frameBorder="0"
-                />
+                <div className="frame-container">
+                  <iframe
+                    id="ytplayer"
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${video.videoId}?autoplay=0&origin=http://example.com`}
+                    frameBorder="0"
+                  />
+                </div>
 
                 <div className="data">
                   <h1>{video.name}</h1>
@@ -76,16 +80,20 @@ function Course() {
               </>
             ) : null}
 
-            {!error && !video && (
+            {!error && !video && current && (
               <div className="course-container">
                 <div>
-                  <h2 className="course-name">{current?.name}</h2>
-                  <p className="instructor">by {current?.instructor?.name}</p>
+                  <h2 className="course-name">{current.name}</h2>
+                  <p className="instructor">by {current.instructor?.name}</p>
                 </div>
-                <p className="description">{current?.description}</p>
+                <p className="description">{current.description}</p>
               </div>
             )}
           </Loading>
+        </div>
+
+        <div>
+          {current && <RamppButton address={current.contract.address} />}
         </div>
       </main>
     </Container>
@@ -103,7 +111,7 @@ export default Course;
 function LoadingVideo() {
   return (
     <div className="loading">
-      <div>Loading your video</div>
+      <Placeholder width="100%" height="500px" />
     </div>
   );
 }
