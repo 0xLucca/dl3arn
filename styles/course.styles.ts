@@ -3,10 +3,13 @@ import styled from "styled-components";
 export const Container = styled.div`
   main {
     display: grid;
-    grid-template-columns: minmax(15rem, 20rem) 1fr;
-    margin: 0 auto;
-    max-width: 1200px;
-    min-height: 100vh;
+    grid-template-columns: minmax(15rem, 20rem) 1fr minmax(15rem, 20rem);
+    margin: 1rem auto;
+
+    .frame-container {
+      height: 75vh;
+      display: flex;
+    }
 
     .videos {
       .course {
@@ -26,6 +29,7 @@ export const Container = styled.div`
     }
 
     .course-content {
+      padding: 0 0.5rem;
       .data {
         border-bottom: 1px solid #00000020;
         padding: 1rem 1rem;

@@ -1,4 +1,4 @@
-import { HiLockClosed } from "react-icons/hi";
+import { HiLockClosed, HiLockOpen } from "react-icons/hi";
 import styled, { css } from "styled-components";
 import { ClockIcon } from "utils/icons";
 import { VideoSafeProps } from "utils/types/video";
@@ -99,7 +99,12 @@ function Video({ hasNFT, selected, video, onClick }: Props) {
   return (
     <Container selected={selected} blocked={blocked} onClick={onClick}>
       <div>
-        {blocked && <HiLockClosed size="1.5rem" className="icon" />}
+        {video.free && blocked && (
+          <HiLockClosed size="1.5rem" className="icon" />
+        )}
+        {!video.free && blocked && (
+          <HiLockOpen size="1.5rem" className="icon" />
+        )}
         <p className="name">{video.name}</p>
         <span className="duration">
           {video.duration}
