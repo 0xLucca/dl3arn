@@ -1,4 +1,15 @@
 import Script from "next/script";
+import styled from "styled-components";
+
+const Container = styled.div`
+  &,
+  & *,
+  .rampp-mintin-container,
+  .rampp-minting-button {
+    width: 95% !important;
+    margin: 0 auto;
+  }
+`;
 
 interface Props {
   address: string;
@@ -6,7 +17,7 @@ interface Props {
 function RamppButton({ address }: Props) {
   if (!address) return null;
   return (
-    <>
+    <Container>
       <div
         id="rampp-minting-container-1539aa28-b4cb-4e2d-a087-d988afd915ad"
         className="rampp-minting-container"
@@ -36,7 +47,7 @@ function RamppButton({ address }: Props) {
         src="https://rampp.xyz/embeds/v2/embed1155.js"
         data-uuid="1539aa28-b4cb-4e2d-a087-d988afd915ad"
       ></Script>
-    </>
+    </Container>
   );
 }
 

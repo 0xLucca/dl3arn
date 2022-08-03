@@ -3,7 +3,7 @@ import { SecondaryButton } from "components/Buttons";
 import { useAuth } from "context/firebase";
 import Link from "next/link";
 import Router from "next/router";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import Avatar from "../Avatar";
 import { Nav, Verify } from "./styled";
 
@@ -19,18 +19,9 @@ function Navbar() {
   const { data } = useAuth();
   const { user, isLoading } = data;
 
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    if (user && !user.emailVerified) {
-      setShow(true);
-      setTimeout(() => setShow(!show), 5000);
-    }
-  }, [user, show]);
-
   return (
     <>
-      {show && (
+      {user && !user.emailVerified && (
         <Verify>
           <p>Please verify your email</p>
           <FaTimes />

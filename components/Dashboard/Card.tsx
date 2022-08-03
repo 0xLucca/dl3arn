@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Router from "next/router";
 import { ClockIcon, FireIcon } from "utils/icons";
 import { CourseModel } from "utils/types/firebase";
 
