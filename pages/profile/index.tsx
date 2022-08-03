@@ -10,6 +10,7 @@ import { PrimaryButton } from "components/Buttons";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import privateRoute from "utils/privateRoute";
+import FullContainer from "styles/FullContainer";
 
 const defaults: Partial<User> = {};
 
@@ -42,48 +43,55 @@ function Profile() {
   return (
     <PrivateRoute>
       <Head>
-        <title>DL3arn | Dashboard</title>
+        <title>DL3arn | Profile</title>
       </Head>
 
-      <ProfileContainer>
-        <div className="info">
-          {photoURL && (
-            <div className="img-container">
-              <Image layout="fill" src={photoURL} alt="" />
+      <FullContainer>
+        <ProfileContainer>
+          <div className="info">
+            {photoURL && (
+              <div className="img-container">
+                <Image layout="fill" src={photoURL} alt="" />
+              </div>
+            )}
+
+            <div className="names">
+              {displayName && <h2 className="name">{displayName}</h2>}
+              <p className="email">{email}</p>
             </div>
-          )}
-
-          <div className="names">
-            {displayName && <h2 className="name">{displayName}</h2>}
-            <p className="email">{email}</p>
           </div>
-        </div>
-        <form className="credentials" onSubmit={onSubmit}>
-          <div className="inputs">
-            <Input
-              onChange={onChange}
-              name="email"
-              value={inputs.email.value}
-              placeholder="email"
-            />
-            <Input
-              onChange={onChange}
-              name="password"
-              value={inputs.password.value}
-              placeholder="password"
-            />
-            <Input
-              onChange={onChange}
-              name="current_password"
-              value={inputs.current_password.value}
-              placeholder="current password"
-            />
-          </div>
-          <PrimaryButton className="btn">update</PrimaryButton>
-        </form>
+          <form className="credentials" onSubmit={onSubmit}>
+            <div className="inputs">
+              <Input
+                label="Email"
+                onChange={onChange}
+                name="email"
+                value={inputs.email.value}
+                placeholder="example@example.com"
+              />
+              <Input
+                label="New password"
+                onChange={onChange}
+                name="password"
+                type="password"
+                value={inputs.password.value}
+                placeholder="new password"
+              />
+              <Input
+                label="Current password"
+                onChange={onChange}
+                name="current_password"
+                type="password"
+                value={inputs.current_password.value}
+                placeholder="current password"
+              />
+            </div>
+            <PrimaryButton className="btn">update</PrimaryButton>
+          </form>
 
-        <PrimaryButton onClick={logout}>Logout</PrimaryButton>
-      </ProfileContainer>
+          <PrimaryButton onClick={logout}>Logout</PrimaryButton>
+        </ProfileContainer>
+      </FullContainer>
     </PrivateRoute>
   );
 }

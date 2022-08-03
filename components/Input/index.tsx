@@ -1,19 +1,22 @@
 import { InputProps } from "@/types/";
-import styled from "styled-components";
+import Password from "./Password";
+import { Label } from "./styles";
 
-const Label = styled.label`
-  width: 100%;
-  input {
-    width: 100%;
-    padding: 0.5rem 0.5rem;
-  }
-`;
+const inputTypes: { [key: string]: (_: InputProps) => JSX.Element } = {
+  password: Password,
+};
 
-function Input({ className, label, ...input }: InputProps) {
+function Input({ className, label, type: inputType, ...input }: InputProps) {
+  const SelectedInput = inputType ? inputTypes[inputType] : "input";
+
   return (
     <Label className={className}>
       {label && <span>{label}</span>}
-      <input autoComplete="off" {...input} />
+      {SelectedInput ? (
+        <SelectedInput autoComplete="off" {...input} />
+      ) : (
+        <input autoComplete="off" {...input} />
+      )}
     </Label>
   );
 }

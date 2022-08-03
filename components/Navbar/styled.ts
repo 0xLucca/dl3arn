@@ -10,38 +10,53 @@ export const Nav = styled.nav`
   height: var(--nav-size);
 
   .wrapper,
-  .menu,
+  .left,
+  .right,
   .avatar {
     height: 100%;
   }
 
   .wrapper {
-    width: 90%;
-    max-width: 1200px;
+    padding: 0 1rem;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    > a {
-      font-weight: bold;
-      font-size: 1.25rem;
-      letter-spacing: 0.5px;
-    }
   }
 
-  .menu {
+  .left,
+  .right {
     display: flex;
     align-items: center;
     list-style: none;
+    height: 100%;
 
     .link {
-      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      opacity: 0.5;
     }
+    .link:hover {
+      opacity: 1;
+    }
+  }
+
+  .left {
+    gap: 1rem;
   }
   .login {
     padding: 0.75rem 1rem;
     font-size: 0.85rem;
+  }
+  .logo {
+    font-weight: 500;
+    font-size: 1.15rem;
+  }
+
+  .logo,
+  .link {
+    display: grid;
+    place-items: center;
+    height: 100%;
   }
 `;
 

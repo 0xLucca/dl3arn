@@ -30,11 +30,6 @@ function Navbar() {
 
   return (
     <>
-      {/*user && !user.emailVerified && (
-        <div className="verify">
-          <p>Please verify your email</p>
-        </div>
-      )*/}
       {show && (
         <Verify>
           <p>Please verify your email</p>
@@ -44,17 +39,20 @@ function Navbar() {
 
       <Nav>
         <div className="wrapper">
-          <Link href={user ? "/dashboard" : "/"}>
-            <a>DL3arn</a>
-          </Link>
+          <div className="left">
+            <Link href="/">
+              <a className="logo">DL3arn</a>
+            </Link>
+            {!isLoading && user && (
+              <>
+                <NavLink href="/dashboard">Dashboard</NavLink>
+              </>
+            )}
+          </div>
 
-          <ul className="menu">
+          <ul className="right">
             {!isLoading && user ? (
               <>
-                <li>
-                  <NavLink href="/dashboard">Dashboard</NavLink>
-                </li>
-
                 <li>
                   <ConnectButton />
                 </li>
