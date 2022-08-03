@@ -52,7 +52,6 @@ export const Main = styled.main`
       font-size: 0.8rem;
       font-weight: 300;
       text-align: center;
-      width: 100%;
 
       span {
         padding: 0 1rem;
@@ -65,7 +64,13 @@ export const Main = styled.main`
         display: block;
         height: 1px;
         position: relative;
-        width: 100%;
+        width: 25%;
+      }
+      ::before {
+        margin: 0 0 0 auto;
+      }
+      ::after {
+        margin: 0 auto 0 0;
       }
     }
   }
@@ -79,7 +84,6 @@ export const Main = styled.main`
     border-radius: 2px;
     max-width: max-content;
     padding: 0.5rem 1rem;
-
     transform: translate(-50%, -150%);
   }
 `;

@@ -17,19 +17,23 @@ interface CustomRequest {
 
 type Handler = APIHandler<CustomRequest, APIGetVideoById>;
 const handler: Handler = async (req, res) => {
-  const { id } = req.query;
-  if (!id)
-    return res.status(400).json({
-      data: null,
-      error: { message: "Video not found", code: API_ERRORS.VIDEO_NOT_FOUND },
-      success: false,
-    });
+  try {
+    const { id } = req.query;
+    if (!id)
+      return res.status(400).json({
+        data: null,
+        error: { message: "Video not found", code: API_ERRORS.VIDEO_NOT_FOUND },
+        success: false,
+      });
 
-  const ref = videosCollection.doc(id);
-  const snapshot = await ref.get();
-  const video = { id: ref.id, ...snapshot.data() };
+    const ref = videosCollection.doc(id);
+    const snapshot = await ref.get();
+    const video = { id: ref.id, ...snapshot.data() };
 
-  return res.json({ data: video, error: null, success: true });
+    return res.json({ data: video, error: null, success: true });
+  } catch (e: any) {
+    return res.json({ data: null, error: e, success: false });
+  }
 };
 
 export default handler;

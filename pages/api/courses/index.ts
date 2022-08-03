@@ -9,19 +9,23 @@ type Handler = (
 ) => Promise<any>;
 
 const handler: Handler = async (_, res) => {
-  const snapshot = await db
-    .collection("courses")
-    .limit(6)
-    .orderBy("score", "desc")
-    .get();
+  try {
+    const snapshot = await db
+      .collection("courses")
+      .limit(6)
+      .orderBy("score", "desc")
+      .get();
 
-  const courses: CourseModel[] = [];
-  snapshot.forEach((snap) => {
-    const course = snap.data();
-    courses.push({ id: snap.id, ...course } as CourseModel);
-  });
+    const courses: CourseModel[] = [];
+    snapshot.forEach((snap) => {
+      const course = snap.data();
+      courses.push({ id: snap.id, ...course } as CourseModel);
+    });
 
-  return res.json(courses);
+    return res.json(courses);
+  } catch (e) {
+    return res.json([]);
+  }
 };
 
 export default handler;

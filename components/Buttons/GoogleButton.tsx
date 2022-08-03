@@ -15,6 +15,9 @@ const Container = styled(Button)`
   span {
     font-size: 0.8rem;
   }
+  :hover {
+    background-color: #0000000a;
+  }
 `;
 
 function GoogleButton() {
