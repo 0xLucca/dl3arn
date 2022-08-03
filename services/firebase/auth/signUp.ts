@@ -4,13 +4,25 @@ import {
 } from "firebase/auth";
 
 import { auth } from "services/firebase";
+import ErrorMessages from "utils/ErrorsMessages";
 
 import { EmailRegister } from "utils/types/firebase";
 
 export const signUp: EmailRegister = async ({ email, password }) => {
-  const data = await createUserWithEmailAndPassword(auth, email, password);
-  if (!auth.currentUser || !data) return null;
-  sendEmailVerification(auth.currentUser);
+  try {
+    const data = await createUserWithEmailAndPassword(auth, email, password);
+    console.log(data);
+    if (!auth.currentUser || !data)
+      return {
+        error: { message: "Something went wrong.", code: "" },
+        user: null,
+      };
+    await sendEmailVerification(auth.currentUser);
 
-  return data;
+    return { error: null, user: data };
+  } catch (e: any) {
+    const { code } = e as { code: string };
+    console.log(code, e.message);
+    return { error: { message: ErrorMessages[code], code }, user: null };
+  }
 };

@@ -1,4 +1,4 @@
-import { FormEvent, useEffect } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -18,11 +18,14 @@ function Signup() {
     data: { user, isLoading },
     signUp,
   } = useAuth();
+
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     if (!isLoading && user) Router.push("/");
   }, [isLoading, user]);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const values = {
       email: inputs.email.value,
@@ -30,7 +33,11 @@ function Signup() {
       validate: inputs.validate.value,
     };
 
-    signUp(values);
+    const res = await signUp(values);
+    if (res.error) {
+      setError(res.error.message);
+      setTimeout(() => setError(null), 5000);
+    } else setError(null);
   };
 
   return (
@@ -62,10 +69,12 @@ function Signup() {
               <PrimaryButton>Next</PrimaryButton>
             </div>
           </form>
+          {error && <p className="error">{error}</p>}
+
           <p className="signup">
             Already have an account?{" "}
             <Link href="/auth/login">
-              <a className="link">Sign in</a>
+              <a className="link">Login</a>
             </Link>
           </p>
         </div>

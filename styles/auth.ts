@@ -12,6 +12,7 @@ export const Main = styled.main`
     color: #5af;
   }
   > div {
+    position: relative;
     width: 481px;
   }
 
@@ -67,5 +68,18 @@ export const Main = styled.main`
         width: 100%;
       }
     }
+  }
+
+  .error {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    color: #fff;
+    background-color: #f66;
+    border-radius: 2px;
+    max-width: max-content;
+    padding: 0.5rem 1rem;
+
+    transform: translate(-50%, -150%);
   }
 `;

@@ -8,8 +8,6 @@ interface Props {
   children: ReactNode;
 }
 function Layout({ children }: Props) {
-  const router = useRouter();
-  console.log(router);
   return (
     <>
       <Head>

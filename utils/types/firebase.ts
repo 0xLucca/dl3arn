@@ -27,7 +27,10 @@ export type Credentials = {
   password?: string;
 };
 
-export type AuthResponse = Promise<UserCredential | null> | void;
+export type AuthResponse = Promise<{
+  error: { message: string; code: string } | null;
+  user: UserCredential | null;
+}>;
 
 /* -------------------- FUNCTIONS -------------------- */
 export type EmailRegister = (_: RegisterParams) => AuthResponse;

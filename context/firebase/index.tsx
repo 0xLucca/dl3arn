@@ -40,8 +40,6 @@ interface Props {
 function Provider({ children }: Props) {
   const [data, setData] = useState<UserData>(initial.auth.data);
 
-  useEffect(() => console.debug(data), [data]);
-
   useEffect(() => {
     const unsuscribe = auth.onAuthStateChanged((user: User | null) => {
       if (user) {
