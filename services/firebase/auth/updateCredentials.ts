@@ -1,6 +1,7 @@
 import {
   EmailAuthProvider,
   reauthenticateWithCredential,
+  sendEmailVerification,
   updateEmail,
   updatePassword,
 } from "firebase/auth";
@@ -11,10 +12,10 @@ import {
   UpdateCredentials,
 } from "utils/types/firebase";
 
-const getCredential: GetEmailCredentials = (email, password) =>
+const getUserCredential: GetEmailCredentials = (email, password) =>
   EmailAuthProvider.credential(email, password);
 
-const reauthenticate: Reauthenticate = async (credential) => {
+const reauthenticateUser: Reauthenticate = async (credential) => {
   if (!auth.currentUser) return null;
   return await reauthenticateWithCredential(auth.currentUser, credential);
 };
@@ -28,15 +29,18 @@ export const updateCredentials: UpdateCredentials = async (
   const { email, password: new_password } = credentials;
   if (!email && !new_password) return;
 
-  const credential = getCredential(auth.currentUser.email, password);
-  const res = await reauthenticate(credential);
+  const credential = getUserCredential(auth.currentUser.email, password);
+  const res = await reauthenticateUser(credential);
   if (!res) return;
 
   const updates = [];
-  if (email) updates.push(updateEmail(auth.currentUser, email));
-  if (new_password)
+  if (email) {
+    updates.push(updateEmail(auth.currentUser, email));
+  }
+  if (new_password) {
     updates.push(updatePassword(auth.currentUser, new_password));
+  }
 
   await Promise.all(updates);
-  auth.signOut();
+  sendEmailVerification(auth.currentUser);
 };
