@@ -3,6 +3,8 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 
+import { signUp as mixpanelSignUp } from "utils/mixpanel";
+
 import { auth } from "services/firebase";
 import ErrorMessages from "utils/ErrorsMessages";
 
@@ -19,10 +21,11 @@ export const signUp: EmailRegister = async ({ email, password }) => {
       };
     await sendEmailVerification(auth.currentUser);
 
+    mixpanelSignUp();
+
     return { error: null, user: data };
   } catch (e: any) {
     const { code } = e as { code: string };
-    console.log(code, e.message);
     return { error: { message: ErrorMessages[code], code }, user: null };
   }
 };

@@ -18,6 +18,10 @@ export const FIREBASE_MESSAGING_SENDER_ID = process.env.NEXT_PUBLIC_API_KEY;
 
 export const FIREBASE_DATABASE_URL = process.env.NEXT_PUBLIC_API_KEY;
 
+/* -------------------- MIXPANEL -------------------- */
+
+export const MIXPANEL_KEY = process.env.NEXT_PUBLIC_MIXPANEL_KEY;
+
 /* -------------------- TESTING -------------------- */
 
 export const AUTH_EMAIL = process.env.NEXT_PUBLIC_AUTH_EMAIL;

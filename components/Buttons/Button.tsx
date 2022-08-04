@@ -2,7 +2,9 @@ import { HTMLAttributes, ReactNode } from "react";
 import styled from "styled-components";
 
 const BaseButton = styled.button`
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 
   width: 100%;
   padding: 0.75rem 1.25rem;

@@ -4,10 +4,12 @@ import { APIGetCourseById } from "utils/types/course";
 import { ContractModel } from "utils/types/firebase";
 import { useAccount, useContractRead } from "wagmi";
 import { NFTabi } from "abis/NFTabi";
+import { course as mixpanelCourse } from "utils/mixpanel";
 
 function useCourse({ id }: { id?: string }) {
   const [current, setCurrent] = useState<APIGetCourseById | null>(null);
   const [contract, setContract] = useState<ContractModel | null>(null);
+  const [firstTime, setFirstTime] = useState<boolean>(true);
   const [locked, setLocked] = useState(true);
   const [readEnable, setReadEnable] = useState(false);
 
@@ -23,12 +25,20 @@ function useCourse({ id }: { id?: string }) {
           if (!a || !b) return 0;
           return Number(b.free) - Number(a.free);
         });
+
         setCurrent(data);
         setContract(data.contract);
       } catch (e) {}
     };
     p();
   }, [id]);
+
+  useEffect(() => {
+    if (current && firstTime) {
+      setFirstTime(false);
+      mixpanelCourse({ name: current.name, id: current.id });
+    }
+  }, [current, firstTime]);
 
   const { address, isConnected } = useAccount({
     onDisconnect() {
@@ -44,7 +54,7 @@ function useCourse({ id }: { id?: string }) {
     addressOrName: contract?.address || "",
     contractInterface: NFTabi,
     functionName: "balanceOf",
-    watch: false,
+    watch: true,
     args: [address, 1],
     enabled: readEnable,
     chainId: contract?.chainId,
@@ -59,7 +69,8 @@ function useCourse({ id }: { id?: string }) {
         setLocked(true);
       }
     }
-  }, [address]);
+  }, [address, isConnected, hasNft]);
+
   return { current, locked };
 }
 

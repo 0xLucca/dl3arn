@@ -11,6 +11,7 @@ import { Main } from "@/styles/auth";
 import { useAuth } from "context/firebase";
 import Router from "next/router";
 import GoogleButton from "components/Buttons/GoogleButton";
+import { useMixpanel } from "context/Mixpanel";
 
 function Signup() {
   const { inputs, onChange } = useForm(registerInputs);
@@ -18,6 +19,7 @@ function Signup() {
     data: { user, isLoading },
     signUp,
   } = useAuth();
+  const { signUp: mixSignUp } = useMixpanel();
 
   const [error, setError] = useState<string | null>(null);
 
@@ -37,7 +39,10 @@ function Signup() {
     if (res.error) {
       setError(res.error.message);
       setTimeout(() => setError(null), 5000);
-    } else setError(null);
+    } else {
+      mixSignUp();
+      setError(null);
+    }
   };
 
   return (

@@ -1,13 +1,22 @@
 import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
-  display: flex;
-  flex-flow: column;
+  display: grid;
+  grid-template-columns: minmax(auto, 10rem) 1fr;
   gap: 2rem;
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem 0;
+
+  .left {
+    font-size: 0.8rem;
+  }
+  .right {
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+  }
 
   .info {
     display: flex;

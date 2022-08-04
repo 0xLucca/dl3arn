@@ -37,7 +37,7 @@ const firebaseContext = createContext<FirebaseContext>(initial);
 interface Props {
   children: ReactNode;
 }
-function Provider({ children }: Props) {
+function FirebaseProvider({ children }: Props) {
   const [data, setData] = useState<UserData>(initial.auth.data);
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function Provider({ children }: Props) {
     </firebaseContext.Provider>
   );
 }
-export default Provider;
+export default FirebaseProvider;
 
 export function useFirebase() {
   return useContext(firebaseContext);

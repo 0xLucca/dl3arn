@@ -9,8 +9,9 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { GlobalStyle } from "../styles/global";
-import Provider from "context/firebase";
+import FirebaseProvider from "context/firebase";
 import Layout from "components/Layouts";
+import MixpanelProvider from "context/Mixpanel";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [chain.mainnet, chain.polygon, chain.rinkeby],
@@ -38,7 +39,7 @@ const wagmiClient = createClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider>
+    <FirebaseProvider>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains} theme={darkTheme()}>
           <GlobalStyle />
@@ -47,7 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Layout>
         </RainbowKitProvider>
       </WagmiConfig>
-    </Provider>
+    </FirebaseProvider>
   );
 }
 

@@ -9,7 +9,6 @@ import Video from "components/Course/Video";
 import Loading from "components/Loading";
 import RamppButton from "components/Buttons/RamppButton";
 import Placeholder from "components/Placeholders";
-import Link from "next/link";
 
 function Course() {
   const router = useRouter();
@@ -93,9 +92,7 @@ function Course() {
           </Loading>
         </div>
         <div>
-          {current && locked && (
-            <RamppButton address={current.contract.address} />
-          )}
+          {current && <RamppButton address={current.contract.address} />}
         </div>
       </main>
     </Container>

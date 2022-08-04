@@ -1,44 +1,24 @@
-import Input from "components/Input";
 import PrivateRoute from "components/PrivateRoute";
 import { useAuth } from "context/firebase";
-import { User } from "firebase/auth";
-import useForm from "hooks/useForm";
 import Image from "next/image";
-import { FormEvent } from "react";
 import { ProfileContainer } from "@/styles/profile.styles";
-import { PrimaryButton } from "components/Buttons";
+import { SecondaryButton } from "components/Buttons";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import privateRoute from "utils/privateRoute";
 import FullContainer from "styles/FullContainer";
+import ProfileForm from "components/Forms/ProfileForm";
 
-const defaults: Partial<User> = {};
+import { BiLogOut } from "react-icons/bi";
 
-const initial = {
-  email: { value: "" },
-  password: { value: "" },
-  current_password: { value: "" },
-};
 function Profile() {
   const {
     data: { user },
     logout,
-    updateCredentials,
   } = useAuth();
-  const { email, photoURL, displayName } = user ? user : defaults;
 
-  const { inputs, onChange } = useForm(initial);
-
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    const { current_password } = inputs;
-    const values = {
-      email: inputs.email.value,
-      password: inputs.password.value,
-    };
-    updateCredentials(current_password.value, values);
-  };
+  if (!user) return null;
+  const { email, photoURL, displayName } = user;
 
   return (
     <PrivateRoute>
@@ -48,48 +28,29 @@ function Profile() {
 
       <FullContainer>
         <ProfileContainer>
-          <div className="info">
-            {photoURL && (
-              <div className="img-container">
-                <Image layout="fill" src={photoURL} alt="" />
-              </div>
-            )}
-
-            <div className="names">
-              {displayName && <h2 className="name">{displayName}</h2>}
-              <p className="email">{email}</p>
-            </div>
+          <div className="left">
+            <SecondaryButton style={{ textAlign: "left" }} onClick={logout}>
+              <BiLogOut />
+              Logout
+            </SecondaryButton>
           </div>
-          <form className="credentials" onSubmit={onSubmit}>
-            <div className="inputs">
-              <Input
-                label="Email"
-                onChange={onChange}
-                name="email"
-                value={inputs.email.value}
-                placeholder="example@example.com"
-              />
-              <Input
-                label="New password"
-                onChange={onChange}
-                name="password"
-                type="password"
-                value={inputs.password.value}
-                placeholder="new password"
-              />
-              <Input
-                label="Current password"
-                onChange={onChange}
-                name="current_password"
-                type="password"
-                value={inputs.current_password.value}
-                placeholder="current password"
-              />
-            </div>
-            <PrimaryButton className="btn">update</PrimaryButton>
-          </form>
 
-          <PrimaryButton onClick={logout}>Logout</PrimaryButton>
+          <div className="right">
+            <div className="info">
+              {photoURL && (
+                <div className="img-container">
+                  <Image layout="fill" src={photoURL} alt="" />
+                </div>
+              )}
+
+              <div className="names">
+                {displayName && <h2 className="name">{displayName}</h2>}
+                <p className="email">{email}</p>
+              </div>
+            </div>
+
+            <ProfileForm />
+          </div>
         </ProfileContainer>
       </FullContainer>
     </PrivateRoute>

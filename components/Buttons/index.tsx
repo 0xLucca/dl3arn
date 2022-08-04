@@ -11,14 +11,14 @@ export const PrimaryButton = styled(Button)`
 `;
 
 export const SecondaryButton = styled(Button)`
-  --color: #1e1e20;
-
   background-color: #fff;
-  border: 1px solid var(--color);
-  color: var(--color);
+  border: 1px solid var(--dark);
+  color: var(--dark);
 
   :hover {
-    background-color: #fafafa;
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+    color: #fff;
   }
 `;
 

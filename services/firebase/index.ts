@@ -1,4 +1,4 @@
-import { removeCookies, setCookie } from "cookies-next";
+import { deleteCookie, setCookie } from "cookies-next";
 import {
   FirebaseApp,
   FirebaseOptions,
@@ -29,7 +29,7 @@ const app: FirebaseApp = !getApps().length
 
 export const auth = getAuth(app);
 auth.onIdTokenChanged(async (user) => {
-  if (!user) return removeCookies("token");
+  if (!user) return deleteCookie("token");
   return setCookie("token", await user.getIdToken());
 });
 export const db = getFirestore(app);
