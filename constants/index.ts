@@ -22,6 +22,11 @@ export const FIREBASE_DATABASE_URL = process.env.NEXT_PUBLIC_API_KEY;
 
 export const MIXPANEL_KEY = process.env.NEXT_PUBLIC_MIXPANEL_KEY;
 
+/* -------------------- HOTJAR -------------------- */
+
+export const HOTJAR_SITE_ID = process.env.NEXT_PUBLIC_HOTJAR_SITE_ID;
+export const HOTJAR_VERSION = process.env.NEXT_PUBLIC_HOTJAR_VERSION;
+
 /* -------------------- TESTING -------------------- */
 
 export const AUTH_EMAIL = process.env.NEXT_PUBLIC_AUTH_EMAIL;
