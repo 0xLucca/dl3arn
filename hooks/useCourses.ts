@@ -15,11 +15,11 @@ function useCourses() {
   const fetchCourses = useCallback(async () => {
     setData((old) => ({ ...old, data: { courses: [], isLoading: true } }));
 
-    const courses = await TypedFetch<CourseModel[]>("/api/courses");
+    const { data } = await TypedFetch<CourseModel[]>("/api/courses");
 
     setData((old) => ({
       ...old,
-      courses,
+      courses: data,
       isLoading: false,
     }));
   }, []);

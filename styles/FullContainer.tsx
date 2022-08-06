@@ -5,8 +5,9 @@ const Container = styled.div`
   min-height: calc(97vh - var(--nav-size));
 `;
 
-function FullContainer({ children }: { children: ReactNode }) {
+function FullPage({ children }: { children: ReactNode }) {
   return <Container>{children}</Container>;
 }
 
-export default FullContainer;
+export default FullPage;
+// chat online hubspot

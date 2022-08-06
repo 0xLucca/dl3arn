@@ -11,7 +11,7 @@ interface Props {
 
 try {
   if (HOTJAR_SITE_ID && HOTJAR_VERSION) {
-    Hotjar.init(Number(HOTJAR_SITE_ID), HOTJAR_VERSION);
+    Hotjar.init(Number(HOTJAR_SITE_ID), Number(HOTJAR_VERSION));
   }
 } catch (e) {}
 

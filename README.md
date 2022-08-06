@@ -27,3 +27,35 @@ You can check out [the RainbowKit GitHub repository](https://github.com/rainbow-
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## .env.local
+
+```env
+#-------- TESTING  -------------
+# Default credentials for login and register
+
+NEXT_PUBLIC_AUTH_EMAIL=<email>
+NEXT_PUBLIC_AUTH_PASSWORD=<password>
+
+# ------------- FIREBASE -------------
+
+NEXT_PUBLIC_FIREBASE_APP_ID=<id>
+NEXT_PUBLIC_FIREBASE_API_KEY=<key>
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=<domain>
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=<id>
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=<bucket>
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=<id>
+
+# ------------- YOUTUBE -------------
+
+YOUTUBE_API_KEY=<key>
+
+# ------------- HOTJAR --------------
+
+NEXT_PUBLIC_HOTJAR_SITE_ID=<id>
+NEXT_PUBLIC_HOTJAR_VERSION=<version>
+
+# ------------- MIXPANEL ------------
+
+NEXT_PUBLIC_MIXPANEL_KEY=<key>
+```
